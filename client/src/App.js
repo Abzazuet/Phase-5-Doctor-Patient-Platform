@@ -8,16 +8,17 @@ import { createTheme } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import { ThemeProvider } from "@emotion/react";
 import { Typography } from "@mui/material";
+import {Route, Routes} from "react-router-dom"
 
 function App() {
   const theme = createTheme({
     palette: {
-      type: 'light',
+      type: "light",
       primary: {
-        main: '#3952D4',
+        main: "#3952D4",
       },
       secondary: {
-        main: '#F45858',
+        main: "#F45858",
       },
     },
   });
@@ -25,7 +26,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Login />
+      <Login />
+
+        <Routes>
+          <Route>
+            
+          </Route>
+        </Routes>
       </div>
     </ThemeProvider>
   );

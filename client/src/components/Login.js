@@ -74,7 +74,6 @@ function Login() {
               color="primary"
               type="submit"
               fullWidth
-              mt={15}
             >
               Log in
             </Button>
