@@ -1,13 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Login from "./components/Login";
 
 import * as React from "react";
-import Button from "@mui/material/Button";
 import { createTheme } from "@mui/material";
-import { orange } from "@mui/material/colors";
 import { ThemeProvider } from "@emotion/react";
-import { Typography } from "@mui/material";
 import {Route, Routes} from "react-router-dom"
 
 function App() {
@@ -30,7 +26,7 @@ function App() {
 
         <Routes>
           <Route>
-            
+
           </Route>
         </Routes>
       </div>

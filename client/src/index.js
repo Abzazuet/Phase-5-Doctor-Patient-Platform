@@ -5,12 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { createStore } from "redux";
-import { Provider } from "react-redux"; /* code change */
+import { Provider } from "react-redux"; 
+import counterReducer from "./features/counter/counterSlice.js"; //This has to be created
+
 
 const store = createStore(
   counterReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-); /* code change */
+);
 
 ReactDOM.render(
   <React.StrictMode>
