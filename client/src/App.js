@@ -1,10 +1,12 @@
 import "./App.css";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Home from "./components/Home";
 
 import * as React from "react";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
-import {Route, Routes} from "react-router-dom"
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const theme = createTheme({
@@ -22,12 +24,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-      <Login />
-
         <Routes>
-          <Route>
-
-          </Route>
+          <Route exact path="/" element={<Login />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/home" element={<Home />}></Route>
         </Routes>
       </div>
     </ThemeProvider>

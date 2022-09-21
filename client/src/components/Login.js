@@ -6,9 +6,11 @@ import "../styles/Login.css";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [logData, setLogData] = useState({ login: "", password: "" });
+  const navigate = useNavigate();
+  const [logData, setLogData] = useState({ username: "", password: "" });
   function onChangeData(event) {
     setLogData({
       ...logData,
@@ -18,7 +20,25 @@ function Login() {
   }
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(logData)
+    event.preventDefault();
+    fetch("/login", {
+      method: "POST",
+      body: JSON.stringify(logData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((r) => {
+      if (r.ok) {
+        window.alert("Logged in with success");
+        navigate("/home");
+      } else {
+        window.alert("Something went wrong");
+        r.json().then((err) => console.log(err.errors));
+      }
+    });
+  }
+  function handleNavigateToSignUp() {
+    navigate("/signup");
   }
   return (
     <Grid container>
@@ -34,11 +54,7 @@ function Login() {
         <Typography mt={5} ml={2} variant="h1">
           Login
         </Typography>
-        <Typography
-          variant="subtitle1"
-          maxWidth={410}
-          ml={5}
-        >
+        <Typography variant="subtitle1" maxWidth={410} ml={5}>
           Sign in with your data. If you are a patient, a doctor must create you
           an account
         </Typography>
@@ -53,11 +69,11 @@ function Login() {
             <TextField
               required
               fullWidth
-              id="login"
-              label="Email"
+              id="username"
+              label="Username"
               margin="dense"
               onChange={onChangeData}
-              value={logData.login}
+              value={logData.username}
             />
             <TextField
               required
@@ -69,12 +85,7 @@ function Login() {
               onChange={onChangeData}
               value={logData.password}
             />
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              fullWidth
-            >
+            <Button variant="contained" color="primary" type="submit" fullWidth>
               Log in
             </Button>
           </div>
@@ -113,6 +124,17 @@ function Login() {
           to drink one. Your doctors, chat with them if you have any questions,
           make appointments.
         </Typography>
+        <Box display="flex" justifyContent="center" mt={3} mr={3}>
+          <Button
+            variant="contained"
+            color="secondary"
+            type="submit"
+            align="left"
+            onClick={handleNavigateToSignUp}
+          >
+            Sign up
+          </Button>
+        </Box>
       </Grid>
     </Grid>
   );
