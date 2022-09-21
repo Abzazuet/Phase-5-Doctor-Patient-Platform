@@ -12,7 +12,7 @@ function Login() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   useEffect(() => {
-    fetch("https://doctor-patient-app-abzazuet.herokuapp.com/me").then((response) => {
+    fetch("/me").then((response) => {
       if (response.ok) {
         response.json().then((user) => setUser(user));
       }

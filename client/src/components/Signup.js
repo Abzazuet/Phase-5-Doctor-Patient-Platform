@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
   const [signUpData, setSignUpData] = useState({
     username: "",
     password: "",
@@ -26,20 +26,21 @@ function Signup() {
   }
   function handleSubmit(event) {
     event.preventDefault();
-    fetch("https://doctor-patient-app-abzazuet.herokuapp.com/signup", {
+    fetch("/signup", {
       method: "POST",
       body: JSON.stringify(signUpData),
       headers: {
         "Content-Type": "application/json",
       },
     }).then((r) => {
-      if (r.ok) {
-        window.alert("Account created with success");
-        navigate("/");
-      } else {
-        window.alert("Something went wrong");
-        r.json().then((err) => console.log(err.errors));
-      }
+        if(r.ok){
+            window.alert("Account created with success")
+            navigate("/")
+        }
+        else{
+            window.alert("Something went wrong")
+            r.json().then((err) => console.log(err.errors));
+        }
     });
   }
 
