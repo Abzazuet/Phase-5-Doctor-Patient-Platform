@@ -13,6 +13,15 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    if session[:user_id]
+      session.delete :user_id
+      head :no_content
+    else
+      create_blank_user_to_return
+    end
+  end
+
   private
 
   def create_blank_user_to_return

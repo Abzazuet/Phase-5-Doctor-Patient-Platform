@@ -3,20 +3,30 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import "../styles/Login.css";
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Login() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    fetch("/me").then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+  if(user){
+    navigate("/home");
+  }
   const [logData, setLogData] = useState({ username: "", password: "" });
   function onChangeData(event) {
     setLogData({
       ...logData,
       [event.target.id]: event.target.value,
     });
-    console.log(logData);
   }
   function handleSubmit(event) {
     event.preventDefault();
