@@ -7,6 +7,7 @@ import * as React from "react";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function App() {
   const theme = createTheme({
@@ -20,7 +21,15 @@ function App() {
       },
     },
   });
-
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    fetch("/me").then((response) => {
+      if (response.ok){
+        response.json().then((user) => setUser(user));
+      }
+    })
+  }, [])
+  console.log(user)
   return (
     <ThemeProvider theme={theme}>
       <div>

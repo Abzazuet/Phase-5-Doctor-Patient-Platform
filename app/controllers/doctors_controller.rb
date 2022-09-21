@@ -8,7 +8,7 @@ class DoctorsController < ApplicationController
   end
 
   def show
-    doctor = Doctor.find(params[:id])
+    doctor = Doctor.find(session[:user_id])
     if doctor
       render json: doctor
     else
