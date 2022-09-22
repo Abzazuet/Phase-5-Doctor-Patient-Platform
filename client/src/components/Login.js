@@ -18,7 +18,7 @@ function Login() {
       if (response.ok) {
         response
           .json()
-          .then((user) => dispatch({ type: "user/save", user: user }));
+          .then((user) => dispatch({ type: "user/login", user: user }));
         navigate("/home");
       }
     });
@@ -40,7 +40,7 @@ function Login() {
       },
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => dispatch({ type: "user/save", user: user }));
+        r.json().then((user) => dispatch({ type: "user/login", user: user }));
         window.alert("Logged in with success");
         navigate("/home");
       } else {

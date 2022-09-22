@@ -22,7 +22,6 @@ function Signup() {
       ...signUpData,
       [event.target.id]: event.target.value,
     });
-    console.log(signUpData);
   }
   function handleSubmit(event) {
     event.preventDefault();

@@ -1,3 +1,3 @@
 class DoctorSerializer < ActiveModel::Serializer
-  attributes :id, :username, :password_digest, :dob, :specialty, :username, :lastname, :created_at
+  attributes :id, :username, :dob, :specialty, :firstname, :lastname, :created_at
 end

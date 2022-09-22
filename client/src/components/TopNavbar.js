@@ -9,21 +9,23 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-const doctorPages = [
-  "home",
-  "patient",
-  "appointments",
-  "blog",
-  "sign up patients",
-];
+const doctorPages = ["home", "patients", "appointments", "sign Up Patient"];
 const patientPages = ["home", "doctors", "appointments"];
-
+let pages;
 const TopNavbar = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  // read from the Redux store
+  const user = useSelector((state) => state.user);
+  if (user.specialty != null) {
+    pages = doctorPages;
+  } else {
+    pages = patientPages;
+  }
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -35,6 +37,7 @@ const TopNavbar = () => {
   };
 
   function handleLogout() {
+    dispatch({ type: "user/logout" });
     fetch("/logout", {
       method: "DELETE",
     }).then(() => navigate("/"));
@@ -44,7 +47,6 @@ const TopNavbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -53,14 +55,14 @@ const TopNavbar = () => {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              textAlign: "center",
             }}
           >
-            LOGO
+            Doctor <br />
+            Patient <br /> Platform
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -92,17 +94,26 @@ const TopNavbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {doctorPages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+              {pages.map((page) => (
+                <Link
+                  key={page}
+                  to={`${page.split(" ").join("")}`}
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    variant="contained"
+                    sx={{ my: 1, color: "white", display: "block" }}
+                  >
+                    <Typography textAlign="center">{page}</Typography>
+                  </Button>
+                </Link>
               ))}
-              <MenuItem onClick={handleLogout}></MenuItem>
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
-            variant="h5"
+            variant="h6"
             noWrap
             component="a"
             href=""
@@ -110,24 +121,26 @@ const TopNavbar = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              textAlign: "center",
             }}
           >
-            LOGO
+            Doctor <br />
+            Patient <br /> Platform
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {doctorPages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+            {pages.map((page) => (
+              <Link key={page} to={`${page.split(" ").join("")}`}>
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
 

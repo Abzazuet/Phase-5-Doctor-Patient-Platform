@@ -12,14 +12,17 @@ function counterReducer(state = initialState, action) {
         ...state,
         items: state.items.concat(state.items.length + 1),
       };
-      case "user/save":
+      case "user/login":
         return{
           ...state, 
           user: action.user,
         }
-        
+      case "user/logout":
+        return{
+          ...state,
+          user: {},
+        }
     default:
-      console.log("Initial state.items length %s", state.items.length);
       return state;
   }
   
