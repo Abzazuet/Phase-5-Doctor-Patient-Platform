@@ -12,7 +12,14 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["home", "appointments", "blog", "sign up patients"];
+const doctorPages = [
+  "home",
+  "patient",
+  "appointments",
+  "blog",
+  "sign up patients",
+];
+const patientPages = ["home", "doctors", "appointments"];
 
 const TopNavbar = () => {
   const navigate = useNavigate();
@@ -85,7 +92,7 @@ const TopNavbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {doctorPages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
@@ -113,7 +120,7 @@ const TopNavbar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {doctorPages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}

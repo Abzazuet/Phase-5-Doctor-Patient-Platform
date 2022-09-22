@@ -1,5 +1,6 @@
 const initialState = {
   items: [],
+  user: {},
 };
 
 function counterReducer(state = initialState, action) {
@@ -11,10 +12,17 @@ function counterReducer(state = initialState, action) {
         ...state,
         items: state.items.concat(state.items.length + 1),
       };
+      case "user/save":
+        return{
+          ...state, 
+          user: action.user,
+        }
+        
     default:
       console.log("Initial state.items length %s", state.items.length);
       return state;
   }
+  
 }
 
 export default counterReducer;

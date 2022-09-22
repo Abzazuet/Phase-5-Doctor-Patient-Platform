@@ -7,20 +7,22 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
+  // gives us the dispatch function to send actions to the Redux store
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
   useEffect(() => {
     fetch("/me").then((response) => {
       if (response.ok) {
-        response.json().then((user) => setUser(user));
+        response
+          .json()
+          .then((user) => dispatch({ type: "user/save", user: user }));
+        navigate("/home");
       }
     });
   }, []);
-  if(user){
-    navigate("/home");
-  }
   const [logData, setLogData] = useState({ username: "", password: "" });
   function onChangeData(event) {
     setLogData({
@@ -30,7 +32,6 @@ function Login() {
   }
   function handleSubmit(event) {
     event.preventDefault();
-    event.preventDefault();
     fetch("/login", {
       method: "POST",
       body: JSON.stringify(logData),
@@ -39,6 +40,7 @@ function Login() {
       },
     }).then((r) => {
       if (r.ok) {
+        r.json().then((user) => dispatch({ type: "user/save", user: user }));
         window.alert("Logged in with success");
         navigate("/home");
       } else {

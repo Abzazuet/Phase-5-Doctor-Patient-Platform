@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
   wrap_parameters format: []
-  before_action :authorize
+  #before_action :authorize, only: [:index, :show, :update, :destroy]
 
   def index
     doctors = Doctor.all
