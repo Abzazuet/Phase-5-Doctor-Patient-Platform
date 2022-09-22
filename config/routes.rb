@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :patients
   resources :doctors
   post "/signup", to: "doctors#create"
   get "/me", to: "doctors#show"
