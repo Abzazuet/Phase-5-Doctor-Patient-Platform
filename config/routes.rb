@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :patients
   resources :doctors
   post "/signup", to: "doctors#create"
+  post "/signupPatient", to: "patients#create"
   get "/me", to: "doctors#show"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

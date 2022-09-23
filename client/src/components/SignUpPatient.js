@@ -24,7 +24,7 @@ function SignUpPatient() {
   }
   function handleSubmit(event) {
     event.preventDefault();
-    fetch("/signup", {
+    fetch("/signupPatient", {
       method: "POST",
       body: JSON.stringify(signUpData),
       headers: {

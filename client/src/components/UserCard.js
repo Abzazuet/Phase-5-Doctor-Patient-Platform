@@ -8,9 +8,17 @@ import Typography from "@mui/material/Typography";
 
 function UserCard({ user, handleDelete }) {
   // read from the Redux store
+  const doctorActions = [{ delete: "red" }];
+  const patientActions = [{delete: "red"}, {info: "blue"}];
+  let actions;
+  if (user.specialty != null) {
+    actions = doctorActions;
+  } else {
+    actions = patientActions;
+  }
   console.log(Object.keys(user));
-  function onUserDelete(){
-    handleDelete(user)
+  function onUserDelete() {
+    handleDelete(user);
   }
   return (
     <Card
@@ -28,10 +36,18 @@ function UserCard({ user, handleDelete }) {
           </Typography>
         ))}
       </CardContent>
-      <CardActions>
-        <Button variant="contained" color="secondary" onClick={onUserDelete}>
-          Delete Account
-        </Button>
+      <CardActions style={{ justifyContent: "center" }}>
+        {actions.map((action) => (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={onUserDelete}
+            align="left"
+          >
+            {Object.keys(action)}
+            {console.log()}
+          </Button>
+        ))}
       </CardActions>
     </Card>
   );

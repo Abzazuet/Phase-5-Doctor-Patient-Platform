@@ -1,6 +1,7 @@
 const initialState = {
   items: [],
   user: {},
+  patients:[],
 };
 
 function counterReducer(state = initialState, action) {
@@ -21,6 +22,12 @@ function counterReducer(state = initialState, action) {
         return{
           ...state,
           user: {},
+          patients: [],
+        }
+      case "patients/save":
+        return{
+          ...state,
+          patients: action.patients,
         }
     default:
       return state;
