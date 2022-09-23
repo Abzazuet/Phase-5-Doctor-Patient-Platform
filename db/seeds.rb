@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Doctor.create(username: "abzazuet", password: "abtemipala", dob: "12-04-1999", specialty: "Cardiology", firstname: "Abel", lastname: "Zazueta")
+
