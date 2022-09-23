@@ -45,7 +45,6 @@ function UserCard({ user, handleDelete }) {
             key={Object.keys(action)}
           >
             {Object.keys(action)}
-            {console.log()}
           </Button>
         ))}
       </CardActions>

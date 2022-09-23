@@ -11,6 +11,7 @@ import {
   ThemeProvider,
   createTheme,
 } from "@material-ui/core";
+//From calendar-react
 import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 
 const CalendarDate = ({
@@ -746,22 +747,7 @@ const CalendarDate = ({
               alignItems: "center",
               justifyContent: "center",
             },
-            /*#__PURE__*/ React.createElement(
-              Grid,
-              {
-                item: true,
-              },
-              /*#__PURE__*/ React.createElement(
-                Button,
-                {
-                  color: "primary",
-                  variant: "contained",
-                  onClick: handleSetMultiple,
-                  className: classes.button,
-                },
-                settingMultiple ? "Done" : "Add Selected Times to Multiple Days"
-              )
-            ),
+
             /*#__PURE__*/ React.createElement(
               Grid,
               {
@@ -777,7 +763,7 @@ const CalendarDate = ({
                       onClick: handleSaveAvailability,
                       className: classes.button,
                     },
-                    "Save Availability"
+                    "Make Appointment"
                   )
             )
           )

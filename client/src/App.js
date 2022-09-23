@@ -4,6 +4,8 @@ import Signup from "./components/Signup";
 import Home from "./components/Home";
 import Doctors from "./components/Doctors";
 import Appointments from "./components/Appointments";
+import NewAppointment from "./components/NewAppointment";
+
 import Patients from "./components/Patients";
 import SignUpPatient from "./components/SignUpPatient";
 import TopNavbar from "./components/TopNavbar";
@@ -40,6 +42,7 @@ function App() {
             <Route path="/doctors" element={<Doctors />}></Route>
             <Route path="/patients" element={<Patients />}></Route>
             <Route path="/appointments" element={<Appointments />}></Route>
+            <Route path="/newAppointment" element={<NewAppointment />}></Route>
             <Route path="/signUpPatient" element={<SignUpPatient />}></Route>
           </Routes>
         </div>
