@@ -1,38 +1,35 @@
 const initialState = {
-  items: [],
   user: {},
-  patients:[],
+  patients: [],
+  appointments: [],
 };
 
 function counterReducer(state = initialState, action) {
   switch (action.type) {
-    case "count/increment":
-      console.log("Current state.items length %s", state.items.length);
-      console.log("Updating state.items length to %s", state.items.length + 1);
+    case "user/login":
       return {
         ...state,
-        items: state.items.concat(state.items.length + 1),
+        user: action.user,
       };
-      case "user/login":
-        return{
-          ...state, 
-          user: action.user,
-        }
-      case "user/logout":
-        return{
-          ...state,
-          user: {},
-          patients: [],
-        }
-      case "patients/save":
-        return{
-          ...state,
-          patients: action.patients,
-        }
+    case "user/logout":
+      return {
+        ...state,
+        user: {},
+        patients: [],
+      };
+    case "patients/save":
+      return {
+        ...state,
+        patients: action.patients,
+      };
+    case "appoitments/save":
+      return {
+        ...state,
+        appointments: action.appointments,
+      };
     default:
       return state;
   }
-  
 }
 
 export default counterReducer;
