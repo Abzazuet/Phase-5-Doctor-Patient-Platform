@@ -6,5 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Doctor.create(username: "abzazuet", password: "abtemipala", dob: "12-04-1999", specialty: "Cardiology", firstname: "Abel", lastname: "Zazueta")
+Medicine.create(name: "Ibuprofen")
+Medicine.create(name: "Omeprazol")
+Medicine.create(name: "Antibiotic")
 
+for i in 1..24 do
+    Frequency.create(time_hours: i)
+end
