@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function Login() {
   // gives us the dispatch function to send actions to the Redux store
@@ -22,7 +22,7 @@ function Login() {
         navigate("/home");
       }
     });
-  }, []);
+  }, [dispatch, navigate]);
   const [logData, setLogData] = useState({ username: "", password: "" });
   function onChangeData(event) {
     setLogData({

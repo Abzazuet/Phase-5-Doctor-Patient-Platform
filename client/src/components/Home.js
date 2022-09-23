@@ -22,13 +22,13 @@ function Home() {
   }
   return (
     <Grid container>
-      <Grid xs={12} md={4}>
+      <Grid item xs={12} md={4}>
         <UserCard user={user} handleDelete={handleDelete} />
       </Grid>
-      <Grid xs={12} md={4}>
+      <Grid item xs={12} md={4}>
         <Chat />
       </Grid>
-      <Grid xs={12} md={4}>
+      <Grid item xs={12} md={4}>
         <Conversation />
       </Grid>
     </Grid>
