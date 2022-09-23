@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 function UserCard({ user, handleDelete }) {
   // read from the Redux store
   const doctorActions = [{ delete: "red" }];
-  const patientActions = [{delete: "red"}, {info: "blue"}];
+  const patientActions = [{ delete: "red" }, { info: "blue" }];
   let actions;
   if (user.specialty != null) {
     actions = doctorActions;
@@ -43,6 +43,7 @@ function UserCard({ user, handleDelete }) {
             color="secondary"
             onClick={onUserDelete}
             align="left"
+            key={Object.keys(action)}
           >
             {Object.keys(action)}
             {console.log()}
