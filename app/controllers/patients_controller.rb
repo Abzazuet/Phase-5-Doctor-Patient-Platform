@@ -27,7 +27,8 @@ class PatientsController < ApplicationController
 
   def update
     patient = Patient.find_by(id: session[:user_id])
-    if user
+    if patient
+      patient.update(patient_params)
       render json: patient
     else
       render json: { error: "Not authorized" }, status: :unauthorized

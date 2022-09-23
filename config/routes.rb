@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :doctors
   resources :medicines, only: [:index, :show]
   resources :frequencies, only: [:index, :show]
-
+  resources :preescriptions
   post "/signup", to: "doctors#create"
   post "/signupPatient", to: "patients#create"
   get "/me", to: "doctors#show"

@@ -4,7 +4,7 @@ class DoctorsController < ApplicationController
 
   def index
     doctors = Doctor.all
-    render json: doctors
+    render json: doctors, include: :appointments
   end
 
   def show
@@ -27,7 +27,8 @@ class DoctorsController < ApplicationController
 
   def update
     doctor = Doctor.find_by(id: session[:user_id])
-    if user
+    if doctor
+      doctor.update(doctor_params)
       render json: doctor
     else
       render json: { error: "Not authorized" }, status: :unauthorized

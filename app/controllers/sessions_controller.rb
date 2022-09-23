@@ -1,10 +1,18 @@
 class SessionsController < ApplicationController
   def create
     doctor = Doctor.find_by(username: params[:username])
+    patient = Patient.find_by(username: params[:username])
     if Doctor.exists?(username: params[:username])
       if doctor&.authenticate(params[:password])
         session[:user_id] = doctor.id
         render json: doctor, status: :created
+      else
+        render json: { errors: doctor.errors.full_messages }, status: :unauthorized
+      end
+    elsif Patient.exists?(username: params[:username])
+      if patient&.authenticate(params[:password])
+        session[:user_id] = patient.id
+        render json: patient, status: :created
       else
         render json: { errors: doctor.errors.full_messages }, status: :unauthorized
       end
