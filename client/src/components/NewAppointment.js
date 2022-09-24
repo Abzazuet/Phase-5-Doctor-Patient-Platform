@@ -17,15 +17,16 @@ function NewAppointment() {
     availability,
     setAvailability,
   });
-  console.log(availability)
+  const dispatch = useDispatch();
   function handlePatientChange(event) {
     setSelectedPatient(event.target.value);
+    dispatch({
+      type: "patients/appointment",
+      patient: event.target.value,
+    });
   }
   return (
     <Grid container>
-      <Grid item xs={12} md={6}>
-        <Calendar />
-      </Grid>
       <Grid item xs={12} md={6}>
         <FormControl fullWidth m={15}>
           <InputLabel id="demo-simple-select-label">Select Patient</InputLabel>
@@ -47,6 +48,9 @@ function NewAppointment() {
           </Select>
         </FormControl>
         <UserCard user={selectedPatient} />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <Calendar />
       </Grid>
     </Grid>
   );

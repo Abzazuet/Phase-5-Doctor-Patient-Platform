@@ -29,12 +29,14 @@ function Appointments() {
   }
   return (
     <Grid container>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={8}>
         <Typography variant="h2" mt={2}>
           Appointments
         </Typography>
         {appointments.map((appointment) => (
-          <AppointmentCard user={appointment} />
+          <Grid item xs={8}>
+            <AppointmentCard user={appointment} />
+          </Grid>
         ))}
       </Grid>
       <Box m={6}>

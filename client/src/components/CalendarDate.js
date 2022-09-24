@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import {
   IconButton,
   Grid,
@@ -362,7 +365,7 @@ const CalendarDate = ({
     }
   }
 
-  function makeQuickAvailability(availability) {
+  function makeQuickAvailability(availability, dispatch) {
     const output = {};
 
     for (let range of availability) {
@@ -386,11 +389,18 @@ const CalendarDate = ({
   return function Calendar() {
     const classes = useStyles();
     const today = moment();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const patientForAppointment = useSelector(
+      (state) => state.patientForAppointment
+    );
+    const doctor = useSelector((state) => state.user);
+
     const [availabilityState, setAvailabilityState] = useState(
       convertAvailabilityFromDatabase(availability)
     );
     const [quickAvailability, setQuickAvailability] = useState(
-      makeQuickAvailability(availability)
+      makeQuickAvailability(availability, dispatch)
     );
     const [activeDay, setActiveDay] = useState(null);
     const [year, setYear] = useState(Number(today.format("YYYY")));
@@ -450,16 +460,35 @@ const CalendarDate = ({
         examineAvailabilityForDay(day);
       }
     };
-
-    const handleSetMultiple = () => {
-      setActiveDay(null);
-      setSettingMultiple(!settingMultiple);
-    };
-
+    //-----------------------------------------Check----------
     const handleSaveAvailability = () => {
       const data = convertAvailabilityForDatabase(availabilityState);
       setSaving(true);
       setAvailability(data);
+      const date = data[data.length - 1].start;
+      dispatch({ type: "appointments/save", appointments: date });
+      const appointmentToFetch = {
+        doctor_id: doctor.id,
+        patient_id: patientForAppointment.id,
+        day: date,
+        motive: " ", //To be filled
+      };
+      console.log(appointmentToFetch);
+      fetch("/appointments", {
+        method: "POST",
+        body: JSON.stringify(appointmentToFetch),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((r) => {
+        if (r.ok) {
+          window.alert("Account created with success");
+          navigate("/appointments");
+        } else {
+          window.alert("Something went wrong");
+          r.json().then((err) => console.log(err.errors));
+        }
+      });
     };
 
     const handleJumpToCurrent = () => {

@@ -15,7 +15,11 @@ class AppointmentsController < ApplicationController
 
   def create
     appointment = Appointment.create(appointment_params)
-    render json: patient, status: :created
+    if appointment.valid?
+      render json: appointment, status: :created
+    else
+      render json: { errors: appointment.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -37,6 +41,6 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.permit(:medicine_id, :frequency_id, :appointment_id, :duration_days)
+    params.permit(:doctor_id, :patient_id, :day, :motive)
   end
 end

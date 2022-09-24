@@ -15,7 +15,6 @@ function UserCard({ user, handleDelete }) {
   } else {
     actions = patientActions;
   }
-  console.log(Object.keys(user));
   function onUserDelete() {
     handleDelete(user);
   }
