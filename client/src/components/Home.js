@@ -5,6 +5,7 @@ import Chat from "./Chat";
 import Conversation from "./Conversation";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Home() {
   // read from the Redux store
@@ -20,6 +21,24 @@ function Home() {
       navigate("/");
     });
   }
+  // Get all the data
+  useEffect(() => {
+    fetch("/appointments").then((response) => {
+      if (response.ok) {
+        response.json().then((appointments) =>
+          dispatch({
+            type: "appointments/save",
+            appointments: appointments,
+          })
+        );
+      }
+    });
+    fetch("/patients")
+      .then((r) => r.json())
+      .then((patients) =>
+        dispatch({ type: "patients/save", patients: patients })
+      );
+  }, [dispatch]);
   return (
     <Grid container>
       <Grid item xs={12} md={4}>

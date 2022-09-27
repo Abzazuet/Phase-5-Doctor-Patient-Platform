@@ -8,22 +8,8 @@ import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import AppointmentCard from "./AppointmentCard";
 function Appointments() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const appointments = useSelector((state) => state.appointments);
-
-  useEffect(() => {
-    fetch("/appointments").then((response) => {
-      if (response.ok) {
-        response
-          .json()
-          .then((appointments) =>
-            dispatch({ type: "appointments/save", appointments: appointments })
-          );
-      }
-    });
-  }, [dispatch]);
   function handleNewAppointment() {
     navigate("/newAppointment");
   }

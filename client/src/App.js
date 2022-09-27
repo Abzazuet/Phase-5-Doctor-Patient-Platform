@@ -14,7 +14,8 @@ import * as React from "react";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
   const theme = createTheme({
@@ -29,7 +30,7 @@ function App() {
     },
   });
   const user = useSelector((state) => state.user);
-  console.log(user);
+
   if (user.username != null) {
     return (
       <ThemeProvider theme={theme}>
