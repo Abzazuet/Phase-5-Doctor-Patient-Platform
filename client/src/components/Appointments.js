@@ -14,7 +14,7 @@ function Appointments() {
   const appointments = useSelector((state) => state.appointments);
 
   useEffect(() => {
-    fetch("appointments").then((response) => {
+    fetch("/appointments").then((response) => {
       if (response.ok) {
         response
           .json()
@@ -34,7 +34,7 @@ function Appointments() {
           Appointments
         </Typography>
         {appointments.map((appointment) => (
-          <Grid item xs={8}>
+          <Grid item xs={8} key={appointment.id}>
             <AppointmentCard user={appointment} />
           </Grid>
         ))}
