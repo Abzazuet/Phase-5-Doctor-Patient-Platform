@@ -12,7 +12,7 @@ function Home() {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  function handleDelete(user) {
+  function handleDelete() {
     fetch(`/deleteAccount`, {
       method: "DELETE",
     }).then(() => {
