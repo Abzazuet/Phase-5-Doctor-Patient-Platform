@@ -23,7 +23,7 @@ function counterReducer(state = initialState, action) {
         ...state,
         patients: action.patients,
       };
-      case "patients/appointment":
+    case "patients/appointment":
       return {
         ...state,
         patientForAppointment: action.patient,

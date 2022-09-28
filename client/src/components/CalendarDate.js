@@ -488,22 +488,10 @@ const CalendarDate = ({
       }).then((r) => {
         if (r.ok) {
           window.alert("Appointment created with success");
-          navigate("/appointments");
+          navigate("/");
         } else {
           window.alert("Something went wrong");
           r.json().then((err) => console.log(err.errors));
-        }
-      });
-
-      fetch(`/doctors/${doctor.id}`).then((response) => {
-        if (response.ok) {
-          response.json().then((data) => {
-            dispatch({
-              type: "appointments/save",
-              appointments: data.appointments,
-            });
-            navigate("/");
-          });
         }
       });
     };

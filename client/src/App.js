@@ -2,7 +2,6 @@ import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Home from "./components/Home";
-import Doctors from "./components/Doctors";
 import Appointments from "./components/Appointments";
 import NewAppointment from "./components/NewAppointment";
 
@@ -29,7 +28,7 @@ function App() {
     },
   });
   const user = useSelector((state) => state.user);
-  if (user.username != null) {
+  if (user.specialty != null) {
     return (
       <ThemeProvider theme={theme}>
         <div>
@@ -38,7 +37,6 @@ function App() {
             <Route exact path="/" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/home" element={<Home />}></Route>
-            <Route path="/doctors" element={<Doctors />}></Route>
             <Route path="/patients" element={<Patients />}></Route>
             <Route path="/appointments" element={<Appointments />}></Route>
             <Route path="/newAppointment" element={<NewAppointment />}></Route>
@@ -49,15 +47,14 @@ function App() {
     );
   } else {
     return (
-
       <ThemeProvider theme={theme}>
         <div>
+          <TopNavbar />
           <Routes>
             <Route exact path="/" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/home" element={<Home />}></Route>
-            <Route path="/doctors" element={<Doctors />}></Route>
-            <Route path="/patients" element={<Patients />}></Route>
+            <Route path="/doctors" element={<Patients />}></Route>
             <Route path="/appointments" element={<Appointments />}></Route>
             <Route path="/signUpPatient" element={<SignUpPatient />}></Route>
           </Routes>

@@ -13,7 +13,7 @@ function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   function handleDelete() {
-    fetch(`/deleteAccount`, {
+    fetch(`/deleteAccount/${user.id}`, {
       method: "DELETE",
     }).then(() => {
       dispatch({ type: "user/logout" });
@@ -21,32 +21,36 @@ function Home() {
       navigate("/");
     });
   }
+
   // Get all the appointments
   useEffect(() => {
-    // Save all data related to user
-    fetch(`/doctors/${user.id}`).then((response) => {
-      if (response.ok) {
-        response.json().then((data) => {
-          dispatch({
-            type: "appointments/save",
-            appointments: data.appointments,
+    // Save all data related to user. Will render everytime user is fetched, since it may give an error for taking too long on fetching info
+    if (user.username !== undefined) {
+      let typeOfUser = user.specialty !== undefined ? "doctors" : "patients";
+      let oppositeToUser =
+        user.specialty !== undefined ? "patients" : "doctors";
+      fetch(`/${typeOfUser}/${user.id}`).then((response) => {
+        if (response.ok) {
+          response.json().then((data) => {
+            dispatch({
+              type: "appointments/save",
+              appointments: data.appointments,
+            });
+
+            let patients = data[oppositeToUser];
+            patients = patients.filter(
+              (value, index, self) =>
+                index === self.findIndex((t) => t.id === value.id)
+            );
+            dispatch({
+              type: "patients/save",
+              patients: patients,
+            });
           });
-          let patients = data.patients;
-          patients = patients.filter(
-            (value, index, self) =>
-              index ===
-              self.findIndex(
-                (t) => t.id === value.id
-              )
-          );
-          dispatch({
-            type: "patients/save",
-            patients: patients,
-          });
-        });
-      }
-    });
-  }, [dispatch]);
+        }
+      });
+    }
+  }, [user]);
   return (
     <Grid container>
       <Grid item xs={12} md={4}>
