@@ -21,10 +21,11 @@ function Home() {
       navigate("/");
     });
   }
+  console.log(user)
   // Get all the appointments 
   useEffect(() => {
     // Modify Rails route to only return appointments of a given user
-    fetch("/appointments").then((response) => {
+    fetch(`/doctors/${user.id}/appointments`).then((response) => {
       if (response.ok) {
         response.json().then((appointments) => {
           dispatch({
@@ -34,7 +35,7 @@ function Home() {
         });
       }
     });
-    // Get all patients
+    // Get all the doctors patients
     fetch("/patients")
       .then((r) => r.json())
       .then((patients) =>
