@@ -33,7 +33,6 @@ function NewAppointment() {
       }
     });
   }, []);
-  console.log(patientsMenu)
   return (
     <Grid container>
       <Grid item xs={12} md={6}>

@@ -394,6 +394,7 @@ const CalendarDate = ({
     const patientForAppointment = useSelector(
       (state) => state.patientForAppointment
     );
+    const appointments = useSelector((state) => state.appointments);
     const doctor = useSelector((state) => state.user);
 
     const [availabilityState, setAvailabilityState] = useState(
@@ -466,14 +467,18 @@ const CalendarDate = ({
       setSaving(true);
       setAvailability(data);
       const date = data[data.length - 1].start;
-      dispatch({ type: "appointments/save", appointments: date });
       const appointmentToFetch = {
         doctor_id: doctor.id,
         patient_id: patientForAppointment.id,
         day: date,
         motive: " ", //To be filled
       };
-      console.log(appointmentToFetch);
+
+      dispatch({
+        type: "appointments/save",
+        appointments: appointments,
+      });
+
       fetch("/appointments", {
         method: "POST",
         body: JSON.stringify(appointmentToFetch),
@@ -482,11 +487,23 @@ const CalendarDate = ({
         },
       }).then((r) => {
         if (r.ok) {
-          window.alert("Account created with success");
+          window.alert("Appointment created with success");
           navigate("/appointments");
         } else {
           window.alert("Something went wrong");
           r.json().then((err) => console.log(err.errors));
+        }
+      });
+
+      fetch(`/doctors/${doctor.id}`).then((response) => {
+        if (response.ok) {
+          response.json().then((data) => {
+            dispatch({
+              type: "appointments/save",
+              appointments: data.appointments,
+            });
+            navigate("/");
+          });
         }
       });
     };

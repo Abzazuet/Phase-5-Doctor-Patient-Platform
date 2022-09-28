@@ -21,24 +21,29 @@ function Home() {
       navigate("/");
     });
   }
-  console.log(user)
-  // Get all the appointments 
+  // Get all the appointments
   useEffect(() => {
     // Save all data related to user
     fetch(`/doctors/${user.id}`).then((response) => {
       if (response.ok) {
         response.json().then((data) => {
-          console.log(data.patients)
           dispatch({
             type: "appointments/save",
             appointments: data.appointments,
           });
+          let patients = data.patients;
+          patients = patients.filter(
+            (value, index, self) =>
+              index ===
+              self.findIndex(
+                (t) => t.id === value.id
+              )
+          );
           dispatch({
             type: "patients/save",
-            patients: data.patients,
+            patients: patients,
           });
         });
-        console.log(user)
       }
     });
   }, [dispatch]);

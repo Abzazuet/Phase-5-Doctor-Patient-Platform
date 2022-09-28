@@ -29,7 +29,6 @@ function App() {
     },
   });
   const user = useSelector((state) => state.user);
-  console.log(user);
   if (user.username != null) {
     return (
       <ThemeProvider theme={theme}>
