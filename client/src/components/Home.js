@@ -24,23 +24,23 @@ function Home() {
   console.log(user)
   // Get all the appointments 
   useEffect(() => {
-    // Modify Rails route to only return appointments of a given user
-    fetch(`/doctors/${user.id}/appointments`).then((response) => {
+    // Save all data related to user
+    fetch(`/doctors/${user.id}`).then((response) => {
       if (response.ok) {
-        response.json().then((appointments) => {
+        response.json().then((data) => {
+          console.log(data.patients)
           dispatch({
             type: "appointments/save",
-            appointments: appointments,
+            appointments: data.appointments,
+          });
+          dispatch({
+            type: "patients/save",
+            patients: data.patients,
           });
         });
+        console.log(user)
       }
     });
-    // Get all the doctors patients
-    fetch("/patients")
-      .then((r) => r.json())
-      .then((patients) =>
-        dispatch({ type: "patients/save", patients: patients })
-      );
   }, [dispatch]);
   return (
     <Grid container>

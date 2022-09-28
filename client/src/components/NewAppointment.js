@@ -1,5 +1,4 @@
 import CalendarDate from "./CalendarDate";
-import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -8,11 +7,13 @@ import MenuItem from "@mui/material/MenuItem";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography } from "@mui/material";
 import UserCard from "./UserCard";
+import { useState, useEffect } from "react";
 
 function NewAppointment() {
   const [availability, setAvailability] = useState([]);
   const patients = useSelector((state) => state.patients);
   const [selectedPatient, setSelectedPatient] = useState([]);
+  const [patientsMenu, setPatientsMenu] = useState([]);
   const Calendar = CalendarDate({
     availability,
     setAvailability,
@@ -25,6 +26,14 @@ function NewAppointment() {
       patient: event.target.value,
     });
   }
+  useEffect(() => {
+    fetch("/patients").then((response) => {
+      if (response.ok) {
+        response.json().then((patients) => setPatientsMenu(patients));
+      }
+    });
+  }, []);
+  console.log(patientsMenu)
   return (
     <Grid container>
       <Grid item xs={12} md={6}>
@@ -38,7 +47,7 @@ function NewAppointment() {
             onChange={handlePatientChange}
           >
             <MenuItem value="none"></MenuItem>
-            {patients.map((patient) => (
+            {patientsMenu.map((patient) => (
               <MenuItem key={patient.id} value={patient} maxidth={150}>
                 <Typography variant="h6">
                   {patient.firstname} {patient.lastname}
