@@ -14,6 +14,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
+    // Get cookie for user
     fetch("/me").then((response) => {
       if (response.ok) {
         response
@@ -32,6 +33,7 @@ function Login() {
   }
   function handleSubmit(event) {
     event.preventDefault();
+    // Check if user exists in DB
     fetch("/login", {
       method: "POST",
       body: JSON.stringify(logData),

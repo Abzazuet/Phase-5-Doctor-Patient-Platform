@@ -21,18 +21,20 @@ function Home() {
       navigate("/");
     });
   }
-  // Get all the data
+  // Get all the appointments 
   useEffect(() => {
+    // Modify Rails route to only return appointments of a given user
     fetch("/appointments").then((response) => {
       if (response.ok) {
-        response.json().then((appointments) =>
+        response.json().then((appointments) => {
           dispatch({
             type: "appointments/save",
             appointments: appointments,
-          })
-        );
+          });
+        });
       }
     });
+    // Get all patients
     fetch("/patients")
       .then((r) => r.json())
       .then((patients) =>

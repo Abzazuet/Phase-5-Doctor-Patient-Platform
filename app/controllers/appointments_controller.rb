@@ -1,6 +1,13 @@
 class AppointmentsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+
   def index
-    appointments = Appointment.all
+    if params[:doctor_id]
+      doctor = Doctor.find(params[:doctor_id])
+      appointments = doctor.appointments
+    else
+      appointments = Appointment.all
+    end
     render json: appointments
   end
 
@@ -42,5 +49,8 @@ class AppointmentsController < ApplicationController
 
   def appointment_params
     params.permit(:doctor_id, :patient_id, :day, :motive)
+  end
+  def render_not_found_response
+    render json: { error: "Record Not Found" }, status: :not_found
   end
 end
