@@ -15,6 +15,7 @@ function SignUpPatient() {
     dob: "",
     firstname: "",
     lastname: "",
+    allergies: "",
   });
   function onChangeData(event) {
     setSignUpData({
@@ -103,6 +104,15 @@ function SignUpPatient() {
             margin="dense"
             onChange={onChangeData}
             value={signUpData.lastname}
+          />
+          <TextField
+            required
+            fullWidth
+            id="allergies"
+            label="Allergies"
+            margin="dense"
+            onChange={onChangeData}
+            value={signUpData.allergies}
           />
           <Button variant="contained" color="primary" type="submit" fullWidth>
             Sign up
