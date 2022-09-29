@@ -5,10 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 function AppointmentCard({ user, handleDelete }) {
   // read from the Redux store
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   function handleStartAppointment() {
     user.status = "started";
     fetch(`/appointments/${user.id}`, {
@@ -20,6 +23,10 @@ function AppointmentCard({ user, handleDelete }) {
     }).then((r) => {
       if (r.ok) {
         console.log("appointment STARTED");
+        dispatch({
+          type: "appointments/current",
+          appointment: user,
+        });
         navigate("/startAppointment");
       } else {
         console.log("something went wrong");
