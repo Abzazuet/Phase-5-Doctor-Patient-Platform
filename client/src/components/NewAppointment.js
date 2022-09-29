@@ -8,11 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Typography } from "@mui/material";
 import UserCard from "./UserCard";
 import { useState, useEffect } from "react";
+import moment from "moment";
 
 function NewAppointment() {
   const [availability, setAvailability] = useState([]);
   const patients = useSelector((state) => state.patients);
+  const appointments = useSelector((state) => state.appointments);
   const [selectedPatient, setSelectedPatient] = useState([]);
+  //Create array of dates in db
+  let appointmentsDates = appointments.map((appointment) => ({
+    start: new Date(appointment.day),
+    end: new Date(moment(appointment.day).add(1, "hours")),
+  }));
+
   const [patientsMenu, setPatientsMenu] = useState([]);
   const Calendar = CalendarDate({
     availability,
@@ -29,10 +37,15 @@ function NewAppointment() {
   useEffect(() => {
     fetch("/patients").then((response) => {
       if (response.ok) {
-        response.json().then((patients) => setPatientsMenu(patients));
+        response.json().then((patients) => {
+          setPatientsMenu(patients);
+          //Append the current appointment with ant new appointments
+          setAvailability([...availability, ...appointmentsDates]);
+        });
       }
     });
   }, []);
+  //console.log(appointments.map((appointment) => appointment.day))
   return (
     <Grid container>
       <Grid item xs={12} md={6}>

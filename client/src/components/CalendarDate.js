@@ -406,7 +406,6 @@ const CalendarDate = ({
       makeQuickAvailability(availability, dispatch)
     );
     function onChangeMotive(e) {
-      console.log(e.target.value);
       setMotive(e.target.value);
     }
     const [activeDay, setActiveDay] = useState(null);
@@ -495,7 +494,7 @@ const CalendarDate = ({
       }).then((r) => {
         if (r.ok) {
           window.alert("Appointment created with success");
-          navigate("/");
+          // navigate("/");
         } else {
           window.alert("Something went wrong");
           r.json().then((err) => console.log(err.errors));
