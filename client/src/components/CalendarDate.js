@@ -319,7 +319,6 @@ const CalendarDate = ({
         }
       }
     }
-
     return output;
   };
 
@@ -333,7 +332,6 @@ const CalendarDate = ({
 
   function addActiveDayToOutput(activeDay, output, month, day, year) {
     let activeRangeStart = null;
-
     for (let time of activeDay) {
       if (time.available && !activeRangeStart) activeRangeStart = time.time;
       else if (!time.available && activeRangeStart) {
@@ -368,7 +366,7 @@ const CalendarDate = ({
 
   function makeQuickAvailability(availability, dispatch) {
     const output = {};
-
+    let value;
     for (let range of availability) {
       if (new Date(range.start) > new Date()) {
         let day = moment(range.start).format("MMMM D, YYYY");
@@ -383,6 +381,7 @@ const CalendarDate = ({
         }
       }
     }
+    console.log(output)
 
     return output;
   }
@@ -471,7 +470,8 @@ const CalendarDate = ({
       const data = convertAvailabilityForDatabase(availabilityState);
       setSaving(true);
       setAvailability(data);
-      const date = data[data.length - 1].start;
+      const date = data[0].start;
+      console.log(data);
       const appointmentToFetch = {
         doctor_id: doctor.id,
         patient_id: patientForAppointment.id,
@@ -494,7 +494,7 @@ const CalendarDate = ({
       }).then((r) => {
         if (r.ok) {
           window.alert("Appointment created with success");
-          // navigate("/");
+          navigate("/");
         } else {
           window.alert("Something went wrong");
           r.json().then((err) => console.log(err.errors));
@@ -859,7 +859,6 @@ const CalendarDate = ({
       } else {
         setTimes(getDefaultTimes());
       }
-
       setActiveDay(day);
     }
 
