@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 //From calendar-react
 import { ArrowLeft, ArrowRight } from "@material-ui/icons";
+import { TextField } from "@mui/material";
 
 const CalendarDate = ({
   availability,
@@ -385,12 +386,13 @@ const CalendarDate = ({
 
     return output;
   }
-
+  //--Return function--
   return function Calendar() {
     const classes = useStyles();
     const today = moment();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [motive, setMotive] = useState("");
     const patientForAppointment = useSelector(
       (state) => state.patientForAppointment
     );
@@ -403,6 +405,10 @@ const CalendarDate = ({
     const [quickAvailability, setQuickAvailability] = useState(
       makeQuickAvailability(availability, dispatch)
     );
+    function onChangeMotive(e) {
+      console.log(e.target.value);
+      setMotive(e.target.value);
+    }
     const [activeDay, setActiveDay] = useState(null);
     const [year, setYear] = useState(Number(today.format("YYYY")));
     const [monthNumber, setMonthNumber] = useState(Number(today.format("M")));
@@ -471,7 +477,7 @@ const CalendarDate = ({
         doctor_id: doctor.id,
         patient_id: patientForAppointment.id,
         day: date,
-        motive: " ", //To be filled
+        motive: motive, //To be filled
       };
 
       dispatch({
@@ -773,6 +779,19 @@ const CalendarDate = ({
           {
             item: true,
           },
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              id="motive"
+              label="Motive"
+              margin="dense"
+              onChange={onChangeMotive}
+              value={motive}
+            />
+            ,
+          </Grid>,
+
           /*#__PURE__*/ React.createElement(
             Grid,
             {
