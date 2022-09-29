@@ -478,6 +478,7 @@ const CalendarDate = ({
         patient_id: patientForAppointment.id,
         day: date,
         motive: motive, //To be filled
+        status: "pending",
       };
 
       dispatch({
