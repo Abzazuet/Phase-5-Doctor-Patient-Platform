@@ -48,8 +48,9 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.permit(:doctor_id, :patient_id, :day, :motive)
+    params.permit(:doctor_id, :patient_id, :day, :motive, :status)
   end
+
   def render_not_found_response
     render json: { error: "Record Not Found" }, status: :not_found
   end
