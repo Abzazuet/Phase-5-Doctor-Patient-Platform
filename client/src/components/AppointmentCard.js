@@ -7,9 +7,33 @@ import Typography from "@mui/material/Typography";
 
 function AppointmentCard({ user, handleDelete }) {
   // read from the Redux store
-
-  function onUserDelete() {
-    handleDelete(user);
+  function handleStartAppointment() {
+    user.status = "started";
+    fetch(`/appointments/${user.id}`, {
+      method: "PATCH",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }).then((r) => {
+      if (r.ok) {
+        console.log("appointment STARTED");
+      } else {
+        console.log("something went wrong");
+      }
+    });
+  }
+  function handleCancelAppointment() {
+    user.status = "cancelled";
+    fetch(`/appointments/${user.id}`, {
+      method: "DELETE",
+    }).then((r) => {
+      if (r.ok) {
+        console.log("appointment DELETED");
+      } else {
+        console.log("something went wrong");
+      }
+    });
   }
   return (
     <Card
@@ -28,22 +52,22 @@ function AppointmentCard({ user, handleDelete }) {
         ))}
       </CardContent>
       <CardActions style={{ justifyContent: "center" }}>
-          <Button
-            variant="contained"
-            color="secondary"
-            //onClick={onUserDelete}
-            align="left"
-          >
-            Info
-          </Button>
-          <Button
-            variant="contained"
-            color="success"
-            //onClick={onUserDelete}
-            align="left"
-          >
-            Start Appointment
-          </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={handleCancelAppointment}
+          align="left"
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={handleStartAppointment}
+          align="left"
+        >
+          Start
+        </Button>
       </CardActions>
     </Card>
   );

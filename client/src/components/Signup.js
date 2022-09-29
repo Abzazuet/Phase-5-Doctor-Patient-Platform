@@ -95,6 +95,7 @@ function Signup() {
             type="date"
             onChange={onChangeData}
             value={signUpData.dob}
+            InputLabelProps={{ shrink: true }}
           />
           <TextField
             required

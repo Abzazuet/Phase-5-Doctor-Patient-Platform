@@ -86,6 +86,7 @@ function SignUpPatient() {
             type="date"
             onChange={onChangeData}
             value={signUpData.dob}
+            InputLabelProps={{ shrink: true }} //Fixes the date from overlapping
           />
           <TextField
             required

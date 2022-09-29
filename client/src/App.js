@@ -14,6 +14,7 @@ import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
+import StartAppointment from "./components/StartAppointment";
 
 function App() {
   const theme = createTheme({
@@ -41,6 +42,10 @@ function App() {
             <Route path="/appointments" element={<Appointments />}></Route>
             <Route path="/newAppointment" element={<NewAppointment />}></Route>
             <Route path="/signUpPatient" element={<SignUpPatient />}></Route>
+            <Route
+              path="/startAppointment"
+              element={<StartAppointment />}
+            ></Route>
           </Routes>
         </div>
       </ThemeProvider>

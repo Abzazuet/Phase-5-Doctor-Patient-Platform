@@ -8,56 +8,83 @@ import { useDispatch, useSelector } from "react-redux";
 
 function UserCard({ user, handleDelete }) {
   // read from the Redux store
-  const doctorActions = [{ delete: "red" }];
-  const patientActions = [{ delete: "red" }, { info: "blue" }];
-  let actions;
-  if (user.specialty != null) {
-    actions = doctorActions;
-  } else {
-    actions = patientActions;
-  }
-  function onUserDelete() {
-    handleDelete(user);
-  }
   //Permit only this parameters to be rendered
-  const userToRender = {
-    id: user.id,
-    username: user.username,
-    dob: user.dob,
-    firstname: user.firstname,
-    lastname: user.lastname,
-  };
-  return (
-    <Card
-      sx={{
-        minWidth: 275,
-        backgroundColor: "#3952D4",
-        margin: "1rem",
-        color: "white",
-      }}
-    >
-      <CardContent>
-        {Object.keys(userToRender).map((info) => (
-          <Typography variant="h5" key={info}>
-            {info}: {userToRender[info]}
-          </Typography>
-        ))}
-      </CardContent>
-      <CardActions style={{ justifyContent: "center" }}>
-        {actions.map((action) => (
+  if (user.specialty != null) {
+    const userToRender = {
+      id: user.id,
+      username: user.username,
+      dob: user.dob,
+      firstname: user.firstname,
+      lastname: user.lastname,
+    };
+    return (
+      <Card
+        sx={{
+          minWidth: 275,
+          backgroundColor: "#3952D4",
+          margin: "1rem",
+          color: "white",
+        }}
+      >
+        <CardContent>
+          {Object.keys(userToRender).map((info) => (
+            <Typography variant="h5" key={info}>
+              {info}: {userToRender[info]}
+            </Typography>
+          ))}
+        </CardContent>
+        <CardActions style={{ justifyContent: "center" }}>
           <Button
             variant="contained"
             color="secondary"
             onClick={onUserDelete}
             align="left"
-            key={Object.keys(action)}
           >
-            {Object.keys(action)}
+            DELETE
           </Button>
-        ))}
-      </CardActions>
-    </Card>
-  );
+        </CardActions>
+      </Card>
+    );
+  } else {
+    const userToRender = {
+      id: user.id,
+      username: user.username,
+      dob: user.dob,
+      firstname: user.firstname,
+      lastname: user.lastname,
+    };
+    return (
+      <Card
+        sx={{
+          minWidth: 275,
+          backgroundColor: "#3952D4",
+          margin: "1rem",
+          color: "white",
+        }}
+      >
+        <CardContent>
+          {Object.keys(userToRender).map((info) => (
+            <Typography variant="h5" key={info}>
+              {info}: {userToRender[info]}
+            </Typography>
+          ))}
+        </CardContent>
+        <CardActions style={{ justifyContent: "center" }}>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={onUserDelete}
+            align="left"
+          >
+            Info
+          </Button>
+        </CardActions>
+      </Card>
+    );
+  }
+  function onUserDelete() {
+    handleDelete(user);
+  }
 }
 
 export default UserCard;
