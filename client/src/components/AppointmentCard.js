@@ -7,48 +7,17 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-function AppointmentCard({ user }) {
+function AppointmentCard({ user, onStart, onCancel }) {
   // read from the Redux store
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  function handleStartAppointment() {
-    user.status = "started";
-    fetch(`/appointments/${user.id}`, {
-      method: "PATCH",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json",
-      },
-    }).then((r) => {
-      if (r.ok) {
-        console.log("appointment STARTED");
-        dispatch({
-          type: "appointments/current",
-          appointment: user,
-        });
-        navigate("/startAppointment");
-      } else {
-        console.log("something went wrong");
-      }
-    });
-  }
-  function handleCancelAppointment() {
-    user.status = "cancelled";
-    fetch(`/appointments/${user.id}`, {
-      method: "DELETE",
-    }).then((r) => {
-      if (r.ok) {
-        navigate("/");
-        console.log("appointment DELETED");
-      } else {
-        console.log("something went wrong");
-      }
-    });
-  }
   let dayTimeDisplay = new Date(
     `${user.day.split("T")[0]} ${user.day.split("T")[1]}`
   );
+  function handleStart(){
+    onStart(user);
+  }
+  function handleCancel(){
+    onCancel(user);
+  }
   return (
     <Card
       sx={{
@@ -69,7 +38,7 @@ function AppointmentCard({ user }) {
         <Button
           variant="contained"
           color="secondary"
-          onClick={handleCancelAppointment}
+          onClick={handleCancel}
           align="left"
         >
           Cancel
@@ -77,7 +46,7 @@ function AppointmentCard({ user }) {
         <Button
           variant="contained"
           color="success"
-          onClick={handleStartAppointment}
+          onClick={handleStart}
           align="left"
         >
           Start
