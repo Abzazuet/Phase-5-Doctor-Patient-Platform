@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UserCard from "./UserCard";
 import Chat from "./Chat";
 import Conversation from "./Conversation";
-import Grid from "@mui/material/Grid";
+import { Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -52,17 +52,22 @@ function Home() {
     }
   }, [user]);
   return (
-    <Grid container>
-      <Grid item xs={12} md={4}>
-        <UserCard user={user} handleDelete={handleDelete} />
+    <div>
+      <Typography variant="h2" mt={2} ml={2}>
+        Home
+      </Typography>
+      <Grid container>
+        <Grid item xs={12} md={4}>
+          <UserCard user={user} handleDelete={handleDelete} />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Chat />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Conversation />
+        </Grid>
       </Grid>
-      <Grid item xs={12} md={4}>
-        <Chat />
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <Conversation />
-      </Grid>
-    </Grid>
+    </div>
   );
 }
 

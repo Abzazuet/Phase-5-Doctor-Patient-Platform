@@ -31,10 +31,18 @@ function AppointmentCard({ user, handleDelete }) {
           <Button
             variant="contained"
             color="secondary"
-            onClick={onUserDelete}
+            //onClick={onUserDelete}
             align="left"
           >
             Info
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            //onClick={onUserDelete}
+            align="left"
+          >
+            Start Appointment
           </Button>
       </CardActions>
     </Card>

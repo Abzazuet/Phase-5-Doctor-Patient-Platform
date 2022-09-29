@@ -13,23 +13,34 @@ function Appointments() {
     navigate("/newAppointment");
   }
   return (
-    <Grid container>
-      <Grid item xs={8}>
-        <Typography variant="h2" mt={2}>
-          Appointments
-        </Typography>
+    <div>
+      <Grid container>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h2" mt={2} ml={2}>
+            Appointments
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box m={6}>
+            <Button
+              variant="contained"
+              fullWidth
+              onClick={handleNewAppointment}
+            >
+              New Appointment
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+
+      <Grid container>
         {appointments.map((appointment) => (
-          <Grid item xs={8} key={appointment.id}>
+          <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={appointment.id}>
             <AppointmentCard user={appointment} />
           </Grid>
         ))}
       </Grid>
-      <Box m={6}>
-        <Button variant="contained" fullWidth onClick={handleNewAppointment}>
-          New Appointment
-        </Button>
-      </Box>
-    </Grid>
+    </div>
   );
 }
 
