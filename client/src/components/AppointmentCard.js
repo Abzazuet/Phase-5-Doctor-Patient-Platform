@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-function AppointmentCard({ user, handleDelete }) {
+function AppointmentCard({ user }) {
   // read from the Redux store
   const navigate = useNavigate();
   const dispatch = useDispatch();
