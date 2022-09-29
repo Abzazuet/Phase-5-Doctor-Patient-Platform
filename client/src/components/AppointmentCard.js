@@ -12,10 +12,10 @@ function AppointmentCard({ user, onStart, onCancel }) {
   let dayTimeDisplay = new Date(
     `${user.day.split("T")[0]} ${user.day.split("T")[1]}`
   );
-  function handleStart(){
+  function handleStart() {
     onStart(user);
   }
-  function handleCancel(){
+  function handleCancel() {
     onCancel(user);
   }
   return (
