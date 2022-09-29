@@ -4,9 +4,11 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 function AppointmentCard({ user, handleDelete }) {
   // read from the Redux store
+  const navigate = useNavigate();
   function handleStartAppointment() {
     user.status = "started";
     fetch(`/appointments/${user.id}`, {
@@ -18,6 +20,7 @@ function AppointmentCard({ user, handleDelete }) {
     }).then((r) => {
       if (r.ok) {
         console.log("appointment STARTED");
+        navigate("/startAppointment");
       } else {
         console.log("something went wrong");
       }
@@ -29,12 +32,16 @@ function AppointmentCard({ user, handleDelete }) {
       method: "DELETE",
     }).then((r) => {
       if (r.ok) {
+        navigate("/");
         console.log("appointment DELETED");
       } else {
         console.log("something went wrong");
       }
     });
   }
+  let dayTimeDisplay = new Date(
+    `${user.day.split("T")[0]} ${user.day.split("T")[1]}`
+  );
   return (
     <Card
       sx={{
@@ -47,7 +54,7 @@ function AppointmentCard({ user, handleDelete }) {
       <CardContent>
         {Object.keys(user).map((info) => (
           <Typography variant="h5" key={info}>
-            {info}: {user[info]}
+            {info}: {info === "day" ? `${dayTimeDisplay}` : user[info]}
           </Typography>
         ))}
       </CardContent>
