@@ -41,7 +41,6 @@ const CalendarDate = ({
       },
     },
   });
-  console.log(theme)
   const useStyles = makeStyles((theme) => ({
     calendar: {
       fontFamily: theme.typography.fontFamily,
@@ -469,7 +468,6 @@ const CalendarDate = ({
       setSaving(true);
       setAvailability(data);
       const date = data[data.length - 1].start;
-      console.log(date);
       const appointmentToFetch = {
         doctor_id: doctor.id,
         patient_id: patientForAppointment.id,
