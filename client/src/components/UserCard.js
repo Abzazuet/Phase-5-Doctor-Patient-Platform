@@ -44,6 +44,7 @@ function UserCard({ user, handleDelete }) {
       dob: user.dob,
       firstname: user.firstname,
       lastname: user.lastname,
+      allergies: user.allergies,
     };
     return (
       <Card className="card-styles">
@@ -55,13 +56,7 @@ function UserCard({ user, handleDelete }) {
           ))}
         </CardContent>
         <CardActions style={{ justifyContent: "center" }}>
-          <Button className="button-info"
-            variant="contained"
-            onClick={onUserDelete}
-            align="left"
-          >
-            Info
-          </Button>
+          
         </CardActions>
       </Card>
     );
