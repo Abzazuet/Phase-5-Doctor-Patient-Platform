@@ -15,7 +15,6 @@ const doctorPages = ["home", "patients", "appointments", "sign Up Patient"];
 const patientPages = ["home", "doctors", "appointments"];
 let pages;
 const TopNavbar = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // read from the Redux store
@@ -43,118 +42,118 @@ const TopNavbar = () => {
   }
 
   return (
-      <AppBar position="static" color="primary">
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 700,
-                color: "inherit",
-                textDecoration: "none",
-                textAlign: "center",
-              }}
-            >
-              Doctor <br />
-              Patient <br /> Platform
-            </Typography>
+    <AppBar position="static" color="primary">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontWeight: 700,
+              color: "inherit",
+              textDecoration: "none",
+              textAlign: "center",
+            }}
+          >
+            Doctor <br />
+            Patient <br /> Platform
+          </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "Navbar",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {pages.map((page) => (
-                  <Link
-                    key={page}
-                    to={`${page.split(" ").join("")}`}
-                    style={{ textDecoration: "none", color: "white" }}
-                  >
-                    <Button
-                      key={page}
-                      onClick={handleCloseNavMenu}
-                      variant="contained"
-                      sx={{ my: 1, color: "white", display: "block" }}
-                    >
-                      <Typography textAlign="center">{page}</Typography>
-                    </Button>
-                  </Link>
-                ))}
-              </Menu>
-            </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href=""
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "Navbar",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
               sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontWeight: 700,
-                color: "inherit",
-                textDecoration: "none",
-                textAlign: "center",
+                display: { xs: "block", md: "none" },
               }}
             >
-              Doctor <br />
-              Patient <br /> Platform
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
-                <Link key={page} to={`${page.split(" ").join("")}`}>
+                <Link
+                  key={page}
+                  to={`${page.split(" ").join("")}`}
+                  style={{ textDecoration: "none", color: "white" }}
+                >
                   <Button
                     key={page}
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
+                    variant="contained"
+                    className="burger-menu"
                   >
-                    {page}
+                    <Typography textAlign="center">{page}</Typography>
                   </Button>
                 </Link>
               ))}
-            </Box>
+            </Menu>
+          </Box>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontWeight: 700,
+              color: "inherit",
+              textDecoration: "none",
+              textAlign: "center",
+            }}
+          >
+            Doctor <br />
+            Patient <br /> Platform
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Link key={page} to={`${page.split(" ").join("")}`}>
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  className="top-link"
+                >
+                  {page}
+                </Button>
+              </Link>
+            ))}
+          </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleLogout}
-              >
-                Logout
-              </Button>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
+          <Box sx={{ flexGrow: 0 }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 export default TopNavbar;

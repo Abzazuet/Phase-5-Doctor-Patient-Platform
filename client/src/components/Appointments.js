@@ -71,7 +71,7 @@ function Appointments() {
 
       <Grid container>
         {appointments.map((appointment) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={appointment.id}>
+          <Grid item xs={12} sm={6} md={4} lg={3} key={appointment.id}>
             <AppointmentCard
               user={appointment}
               onStart={handleStartAppointment}

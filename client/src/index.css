@@ -1,13 +1,46 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.css-52n6de-MuiPaper-root-MuiAppBar-root {
+  background-color: #3952d4 !important;
+  color: white !important;
+}
+.css-q8hpuo-MuiFormControl-root {
+  margin-top: 3rem !important;
+}
+.top-link {
+  color: white !important;
+  margin: 2rem !important;
+  font-size: inherit !important;
+  text-decoration: none !important;
+}
+.burger-menu {
+  color: white !important;
+  display: block !important;
+  margin: 0.5rem 0.5rem 0 0.5rem !important;
+}
+.card-styles {
+  background-color: #3952d4 !important;
+  min-width: 275px !important;
+  color: white !important;
+  margin: 1rem !important;
+}
+.button-delete {
+  background-color: #f45858 !important;
+  size: 2rem important;
+}
+.button-info {
+  background-color: green !important;
+  size: 2rem important;
 }

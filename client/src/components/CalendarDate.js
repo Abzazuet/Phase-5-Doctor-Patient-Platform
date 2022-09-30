@@ -39,9 +39,6 @@ const CalendarDate = ({
       secondary: {
         main: "#F45858",
       },
-      background: {
-        default: "#3952D4"
-      },
     },
   });
   console.log(theme)

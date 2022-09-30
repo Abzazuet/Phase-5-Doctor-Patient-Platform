@@ -19,14 +19,7 @@ function AppointmentCard({ user, onStart, onCancel }) {
     onCancel(user);
   }
   return (
-    <Card
-      sx={{
-        minWidth: 275,
-        backgroundColor: "#3952D4",
-        margin: "1rem",
-        color: "white",
-      }}
-    >
+    <Card className="card-styles">
       <CardContent>
         {Object.keys(user).map((info) => (
           <Typography variant="h5" key={info}>
@@ -35,17 +28,15 @@ function AppointmentCard({ user, onStart, onCancel }) {
         ))}
       </CardContent>
       <CardActions style={{ justifyContent: "center" }}>
-        <Button
+        <Button className="button-delete"
           variant="contained"
-          color="secondary"
           onClick={handleCancel}
           align="left"
         >
           Cancel
         </Button>
-        <Button
+        <Button className="button-info"
           variant="contained"
-          color="success"
           onClick={handleStart}
           align="left"
         >

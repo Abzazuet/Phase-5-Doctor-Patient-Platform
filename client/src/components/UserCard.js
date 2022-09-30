@@ -18,14 +18,7 @@ function UserCard({ user, handleDelete }) {
       lastname: user.lastname,
     };
     return (
-      <Card
-        sx={{
-          minWidth: 275,
-          backgroundColor: "#3952D4",
-          margin: "1rem",
-          color: "white",
-        }}
-      >
+      <Card className="card-styles">
         <CardContent>
           {Object.keys(userToRender).map((info) => (
             <Typography variant="h5" key={info}>
@@ -34,9 +27,8 @@ function UserCard({ user, handleDelete }) {
           ))}
         </CardContent>
         <CardActions style={{ justifyContent: "center" }}>
-          <Button
+          <Button className="button-delete"
             variant="contained"
-            color="secondary"
             onClick={onUserDelete}
             align="left"
           >
@@ -54,14 +46,7 @@ function UserCard({ user, handleDelete }) {
       lastname: user.lastname,
     };
     return (
-      <Card
-        sx={{
-          minWidth: 275,
-          backgroundColor: "#3952D4",
-          margin: "1rem",
-          color: "white",
-        }}
-      >
+      <Card className="card-styles">
         <CardContent>
           {Object.keys(userToRender).map((info) => (
             <Typography variant="h5" key={info}>
@@ -70,9 +55,8 @@ function UserCard({ user, handleDelete }) {
           ))}
         </CardContent>
         <CardActions style={{ justifyContent: "center" }}>
-          <Button
+          <Button className="button-info"
             variant="contained"
-            color="success"
             onClick={onUserDelete}
             align="left"
           >
