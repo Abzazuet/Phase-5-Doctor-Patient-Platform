@@ -39,8 +39,12 @@ const CalendarDate = ({
       secondary: {
         main: "#F45858",
       },
+      background: {
+        default: "#3952D4"
+      },
     },
   });
+  console.log(theme)
   const useStyles = makeStyles((theme) => ({
     calendar: {
       fontFamily: theme.typography.fontFamily,
@@ -366,7 +370,6 @@ const CalendarDate = ({
 
   function makeQuickAvailability(availability, dispatch) {
     const output = {};
-    let value;
     for (let range of availability) {
       if (new Date(range.start) > new Date()) {
         let day = moment(range.start).format("MMMM D, YYYY");
@@ -381,8 +384,6 @@ const CalendarDate = ({
         }
       }
     }
-    console.log(output)
-
     return output;
   }
   //--Return function--
@@ -470,8 +471,8 @@ const CalendarDate = ({
       const data = convertAvailabilityForDatabase(availabilityState);
       setSaving(true);
       setAvailability(data);
-      const date = data[0].start;
-      console.log(data);
+      const date = data[data.length - 1].start;
+      console.log(date);
       const appointmentToFetch = {
         doctor_id: doctor.id,
         patient_id: patientForAppointment.id,

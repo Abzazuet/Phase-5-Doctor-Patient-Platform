@@ -28,6 +28,7 @@ function App() {
       },
     },
   });
+  console.log(theme)
   const user = useSelector((state) => state.user);
   if (user.specialty != null) {
     return (
