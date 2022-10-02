@@ -49,7 +49,7 @@ function NewAppointment() {
   return (
     <Grid container>
       <Grid item xs={12} md={6}>
-        <FormControl fullWidth m={15}>
+        <FormControl fullWidth className="margin-top">
           <InputLabel id="demo-simple-select-label">Select Patient</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -60,14 +60,15 @@ function NewAppointment() {
           >
             <MenuItem value="none"></MenuItem>
             {patientsMenu.map((patient) => (
-              <MenuItem key={patient.id} value={patient} maxidth={150}>
-                <Typography variant="h6">
+              <MenuItem key={patient.id} value={patient}  className="break-line">
+                <Typography variant="h6"  className="break-line">
                   {patient.firstname} {patient.lastname}
                 </Typography>
               </MenuItem>
             ))}
           </Select>
         </FormControl>
+        
         <UserCard user={selectedPatient} />
       </Grid>
       <Grid item xs={12} md={6}>

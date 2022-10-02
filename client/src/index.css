@@ -42,5 +42,19 @@ code {
 }
 .button-info {
   background-color: green !important;
-  size: 2rem important;
+  size: 2rem !important;
+}
+.margin-top {
+  margin: 1rem !important;
+  max-width: 50% !important;
+
+}
+
+.break-line {
+  display: inline !important;
+  max-width: 50% !important;
+}
+.break-line::after {
+  content: "\a" !important;
+  white-space: pre !important;
 }
