@@ -43,7 +43,7 @@ function SignUpPatient() {
   }
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12}>
       <Typography mt={5} ml={2} variant="h1">
         Sign-up
       </Typography>
