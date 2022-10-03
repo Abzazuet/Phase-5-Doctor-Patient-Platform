@@ -28,7 +28,7 @@ function App() {
       },
     },
   });
-  console.log(theme)
+  console.log(theme);
   const user = useSelector((state) => state.user);
   if (user.specialty != null) {
     return (
@@ -51,11 +51,26 @@ function App() {
         </div>
       </ThemeProvider>
     );
-  } else {
+  } else if (user.allergies != null) {
     return (
       <ThemeProvider theme={theme}>
         <div>
           <TopNavbar />
+          <Routes>
+            <Route exact path="/" element={<Login />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/home" element={<Home />}></Route>
+            <Route path="/doctors" element={<Patients />}></Route>
+            <Route path="/appointments" element={<Appointments />}></Route>
+            <Route path="/signUpPatient" element={<SignUpPatient />}></Route>
+          </Routes>
+        </div>
+      </ThemeProvider>
+    );
+  } else {
+    return(
+      <ThemeProvider theme={theme}>
+        <div>
           <Routes>
             <Route exact path="/" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>

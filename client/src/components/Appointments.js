@@ -38,11 +38,18 @@ function Appointments() {
   function handleCancelAppointment(user) {
     user.status = "cancelled";
     fetch(`/appointments/${user.id}`, {
-      method: "DELETE",
+      method: "PATCH",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-type": "application/json",
+      },
     }).then((r) => {
       if (r.ok) {
-        navigate("/");
-        console.log("appointment DELETED");
+        console.log("appointment cancelled");
+        dispatch({
+          type: "appointments/current",
+          appointment: user,
+        });
       } else {
         console.log("something went wrong");
       }

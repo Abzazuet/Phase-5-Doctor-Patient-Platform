@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [signUpData, setSignUpData] = useState({
     username: "",
     password: "",
@@ -32,27 +32,30 @@ function Signup() {
         "Content-Type": "application/json",
       },
     }).then((r) => {
-        if(r.ok){
-            window.alert("Account created with success")
-            navigate("/")
-        }
-        else{
-            window.alert("Something went wrong")
-            r.json().then((err) => console.log(err.errors));
-        }
+      if (r.ok) {
+        window.alert("Account created with success");
+        navigate("/");
+      } else {
+        window.alert("Something went wrong");
+        r.json().then((err) => console.log(err.errors));
+      }
     });
   }
-
+  function handleNavigateToHome() {
+    navigate("/");
+  }
   return (
     <Grid item xs={12} md={6}>
-      <Typography variant="h4" align="left" ml={1} mt={2}>
-        Doctor
-        <br />
-        <Typography variant="h4" color="primary">
-          Patient
+      <Button onClick={handleNavigateToHome}>
+        <Typography variant="h4" align="left" ml={1} mt={2}>
+          Doctor
+          <br />
+          <Typography variant="h4" color="primary">
+            Patient
+          </Typography>
+          Platform
         </Typography>
-        Platform
-      </Typography>
+      </Button>
       <Typography mt={5} ml={2} variant="h1">
         Sign-up
       </Typography>

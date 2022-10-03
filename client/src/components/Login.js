@@ -54,17 +54,23 @@ function Login() {
   function handleNavigateToSignUp() {
     navigate("/signup");
   }
+  function handleLogoClick() {
+    navigate("/")
+  }
   return (
     <Grid container>
-      <Grid item xs={12} md={6}>
-        <Typography variant="h4" align="left" ml={1} mt={2}>
-          Doctor
-          <br />
-          <Typography variant="h4" color="primary">
-            Patient
+      <Grid item xs={12} md={6} onClick={handleLogoClick}>
+        <Button>
+          <Typography variant="h4" align="left" ml={1} mt={2}>
+            Doctor
+            <br />
+            <Typography variant="h4" color="primary">
+              Patient
+            </Typography>
+            Platform
           </Typography>
-          Platform
-        </Typography>
+        </Button>
+
         <Typography mt={5} ml={2} variant="h1">
           Login
         </Typography>
@@ -111,7 +117,6 @@ function Login() {
         md={6}
         style={{ backgroundColor: "#3952D4" }}
         align="center"
-        pb={35}
         mr={0}
       >
         <Typography variant="h1" mt={50} color="white" align="center" mb={5}>
@@ -138,8 +143,9 @@ function Login() {
           to drink one. Your doctors, chat with them if you have any questions,
           make appointments.
         </Typography>
-        <Box display="flex" justifyContent="center" mt={3} mr={3}>
+        <Box display="flex" justifyContent="center" mt={3} mr={3} ml={3} mb={3}>
           <Button
+            fullWidth
             variant="contained"
             color="secondary"
             type="submit"

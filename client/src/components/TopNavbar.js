@@ -40,7 +40,10 @@ const TopNavbar = () => {
       method: "DELETE",
     }).then(() => navigate("/"));
   }
-
+  function goHome(e) {
+    e.preventDefault();
+    navigate("/home");
+  }
   return (
     <AppBar position="static" className="top-navbar">
       <Container maxWidth="xl">
@@ -58,6 +61,7 @@ const TopNavbar = () => {
               textDecoration: "none",
               textAlign: "center",
             }}
+            onClick={goHome}
           >
             Doctor <br />
             Patient <br /> Platform
