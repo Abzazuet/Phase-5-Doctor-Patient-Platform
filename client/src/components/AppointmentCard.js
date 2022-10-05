@@ -7,8 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-function AppointmentCard({ user, onStart, onCancel }) {
-  const patients = useSelector((state) => state.patients);
+function AppointmentCard({ user, onStart, onCancel, patient }) {
   // read from the Redux store
   let dayTimeDisplay = new Date(
     `${user.day.split("T")[0]} ${user.day.split("T")[1]}`
@@ -21,25 +20,20 @@ function AppointmentCard({ user, onStart, onCancel }) {
   }
 
   if (onStart !== undefined) {
-    let patientName = patients.filter(
-      (patient) => user.patient_id === patient.id
-    )[0];
-    patientName = patientName.firstname + " " + patientName.lastname;
-    console.log(patientName);
+    let patientName = patient.firstname + " " + patient.lastname;
     let appointmentInfoToShow = {
-      day: user.day,
-      motive: user.motive,
-      status: user.status,
-      patientName: patientName,
+      "Day": user.day,
+      "Motive": user.motive,
+      "Status": user.status,
+      "Patient name": patientName,
     };
-    console.log(appointmentInfoToShow);
     return (
       <Card className="card-styles">
         <CardContent>
           {Object.keys(appointmentInfoToShow).map((info) => (
             <Typography variant="h5" key={info}>
               {info}:{" "}
-              {info === "day"
+              {info === "Day"
                 ? `${dayTimeDisplay}`
                 : appointmentInfoToShow[info]}
             </Typography>

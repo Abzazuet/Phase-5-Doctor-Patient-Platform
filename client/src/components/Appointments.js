@@ -8,8 +8,14 @@ import { Typography } from "@mui/material";
 import AppointmentCard from "./AppointmentCard";
 
 function Appointments() {
-  const appointments = useSelector((state) => state.appointments);
+  let appointments = useSelector((state) => state.appointments);
   const navigate = useNavigate();
+  let patients = useSelector((state) => state.patients);
+  appointments = appointments.sort(
+    (a, b) =>
+      new Date(`${a.day.split("T")[0]} ${a.day.split("T")[1]}`) -
+      new Date(`${b.day.split("T")[0]} ${b.day.split("T")[1]}`)
+  );
   const dispatch = useDispatch();
   function handleNewAppointment() {
     navigate("/newAppointment");
@@ -83,6 +89,11 @@ function Appointments() {
               user={appointment}
               onStart={handleStartAppointment}
               onCancel={handleCancelAppointment}
+              patient={
+                patients.filter(
+                  (patient) => appointment.patient_id === patient.id
+                )[0]
+              }
             />
           </Grid>
         ))}
