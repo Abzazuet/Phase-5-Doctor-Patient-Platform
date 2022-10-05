@@ -107,7 +107,7 @@ function Appointments() {
               Pending
               <Grid container align="left">
                 {pendingAppointments.map((appointment) => (
-                  <Grid item xs={12} sm={6} md={4} lg={12}>
+                  <Grid item xs={12} sm={6} md={4} lg={12} key={appointment.id}>
                     <AppointmentCard
                       user={appointment}
                       style="card-styles-pending"
@@ -129,7 +129,7 @@ function Appointments() {
               Cancelled
               <Grid container align="left">
                 {cancelledAppointments.map((appointment) => (
-                  <Grid item xs={12} sm={6} md={4} lg={12}>
+                  <Grid item xs={12} sm={6} md={4} lg={12} key={appointment.id}>
                     <AppointmentCard
                       user={appointment}
                       style="card-styles-cancelled"
@@ -149,7 +149,7 @@ function Appointments() {
               Finished
               <Grid container align="left">
                 {finishedAppointments.map((appointment) => (
-                  <Grid item xs={12} sm={6} md={4} lg={12}>
+                  <Grid item xs={12} sm={6} md={4} lg={12} key={appointment.id}>
                     <AppointmentCard
                       user={appointment}
                       style="card-styles-finished"
