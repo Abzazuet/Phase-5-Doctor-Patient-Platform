@@ -35,10 +35,13 @@ const TopNavbar = () => {
   };
 
   function handleLogout() {
-    dispatch({ type: "user/logout" });
+    
     fetch("/logout", {
       method: "DELETE",
-    }).then(() => navigate("/"));
+    }).then(() => {
+      dispatch({ type: "user/logout", user: {} });
+      navigate("/");
+    });
   }
   function goHome(e) {
     e.preventDefault();
