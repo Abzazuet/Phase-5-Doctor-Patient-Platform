@@ -9,6 +9,7 @@ import AppointmentCard from "./AppointmentCard";
 
 function Appointments() {
   let appointments = useSelector((state) => state.appointments);
+  const userData = useSelector((state) => state.user);
   const navigate = useNavigate();
   let patients = useSelector((state) => state.patients);
   appointments = appointments.sort(
@@ -17,9 +18,21 @@ function Appointments() {
       new Date(`${b.day.split("T")[0]} ${b.day.split("T")[1]}`)
   );
   const dispatch = useDispatch();
+  const isDoctor = userData.specialty != undefined;
+  console.log(isDoctor);
   function handleNewAppointment() {
     navigate("/newAppointment");
   }
+  let cancelledAppointments = appointments.filter(
+    (appointment) => appointment.status == "cancelled"
+  );
+  let pendingAppointments = appointments.filter(
+    (appointment) => appointment.status == "pending"
+  );
+  let finishedAppointments = appointments.filter(
+    (appointment) => appointment.status == "finished"
+  );
+
   function handleStartAppointment(user) {
     user.status = "started";
     fetch(`/appointments/${user.id}`, {
@@ -35,6 +48,7 @@ function Appointments() {
           type: "appointments/current",
           appointment: user,
         });
+        window.alert("Appointment will start");
         navigate("/startAppointment");
       } else {
         console.log("something went wrong");
@@ -51,11 +65,12 @@ function Appointments() {
       },
     }).then((r) => {
       if (r.ok) {
-        console.log("appointment cancelled");
         dispatch({
           type: "appointments/current",
           appointment: user,
         });
+        window.alert("Appointment was cancelled");
+        navigate("/home");
       } else {
         console.log("something went wrong");
       }
@@ -70,34 +85,87 @@ function Appointments() {
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Box m={6}>
-            <Button
-              variant="contained"
-              fullWidth
-              onClick={handleNewAppointment}
-            >
-              New Appointment
-            </Button>
-          </Box>
+          {isDoctor ? (
+            <Box m={6}>
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={handleNewAppointment}
+              >
+                New Appointment
+              </Button>
+            </Box>
+          ) : (
+            ""
+          )}
         </Grid>
       </Grid>
-
-      <Grid container>
-        {appointments.map((appointment) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={appointment.id}>
-            <AppointmentCard
-              user={appointment}
-              onStart={handleStartAppointment}
-              onCancel={handleCancelAppointment}
-              patient={
-                patients.filter(
-                  (patient) => appointment.patient_id === patient.id
-                )[0]
-              }
-            />
+      <Box ml={3} mr={3}>
+        <Grid container>
+          <Grid container item xs={12} lg={4}>
+            <Typography variant="h2" mt={2} ml={2} align="center">
+              Pending
+              <Grid container align="left">
+                {pendingAppointments.map((appointment) => (
+                  <Grid item xs={12} sm={6} md={4} lg={12}>
+                    <AppointmentCard
+                      user={appointment}
+                      style="card-styles-pending"
+                      onStart={handleStartAppointment}
+                      onCancel={handleCancelAppointment}
+                      patient={
+                        patients.filter(
+                          (patient) => appointment.patient_id === patient.id
+                        )[0]
+                      }
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </Typography>
           </Grid>
-        ))}
-      </Grid>
+          <Grid container item xs={12} lg={4}>
+            <Typography variant="h2" mt={2} ml={2} align="center">
+              Cancelled
+              <Grid container align="left">
+                {cancelledAppointments.map((appointment) => (
+                  <Grid item xs={12} sm={6} md={4} lg={12}>
+                    <AppointmentCard
+                      user={appointment}
+                      style="card-styles-cancelled"
+                      patient={
+                        patients.filter(
+                          (patient) => appointment.patient_id === patient.id
+                        )[0]
+                      }
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </Typography>
+          </Grid>
+          <Grid container item xs={12} lg={4}>
+            <Typography variant="h2" mt={2} ml={2} align="center">
+              Finished
+              <Grid container align="left">
+                {finishedAppointments.map((appointment) => (
+                  <Grid item xs={12} sm={6} md={4} lg={12}>
+                    <AppointmentCard
+                      user={appointment}
+                      style="card-styles-finished"
+                      patient={
+                        patients.filter(
+                          (patient) => appointment.patient_id === patient.id
+                        )[0]
+                      }
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
     </div>
   );
 }

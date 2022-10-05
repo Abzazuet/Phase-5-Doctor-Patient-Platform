@@ -42,8 +42,11 @@ function Login() {
       },
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => dispatch({ type: "user/login", user: user }));
+        r.json().then((user) =>{ 
+          console.log(user)
+          dispatch({ type: "user/login", user: user })});
         window.alert("Logged in with success");
+        
         navigate("/home");
       } else {
         window.alert("Something went wrong");

@@ -36,12 +36,30 @@ code {
   color: white !important;
   margin: 1rem !important;
 }
+.card-styles-pending{
+  background-color: #3952d4 !important;
+  min-width: 275px !important;
+  color: white !important;
+  margin: 1rem !important;
+}
+.card-styles-finished{
+  background-color: #39d448 !important;
+  min-width: 275px !important;
+  color: white !important;
+  margin: 1rem !important;
+}
+.card-styles-cancelled {
+  background-color: #d46a39 !important;
+  min-width: 275px !important;
+  color: white !important;
+  margin: 1rem !important;
+}
 .button-delete {
-  background-color: #f45858 !important;
+  background-color: #ef3c3c !important;
   size: 2rem !important;
 }
 .button-info {
-  background-color: green !important;
+  background-color: rgb(12, 108, 12) !important;
   size: 2rem !important;
 }
 .margin-top {

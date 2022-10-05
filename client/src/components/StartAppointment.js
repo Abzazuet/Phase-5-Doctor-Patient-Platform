@@ -115,7 +115,7 @@ function StartAppointment() {
             <Typography variant="h2" mt={2} ml={2}>
               Appointment Details
             </Typography>
-            <AppointmentCard user={appointment} />
+            <AppointmentCard user={appointment} style="card-styles-pending"/>
           </Grid>
         </Grid>
         <Grid

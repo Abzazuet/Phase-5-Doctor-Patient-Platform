@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-function AppointmentCard({ user, onStart, onCancel, patient }) {
+function AppointmentCard({ user, onStart, onCancel, patient, style }) {
   // read from the Redux store
   let dayTimeDisplay = new Date(
     `${user.day.split("T")[0]} ${user.day.split("T")[1]}`
@@ -20,13 +20,12 @@ function AppointmentCard({ user, onStart, onCancel, patient }) {
   if (onStart !== undefined) {
     let patientName = patient.firstname + " " + patient.lastname;
     let appointmentInfoToShow = {
-      "Day": user.day,
-      "Motive": user.motive,
-      "Status": user.status,
+      Day: user.day,
+      Motive: user.motive,
       "Patient name": patientName,
     };
     return (
-      <Card className="card-styles">
+      <Card className={style}>
         <CardContent>
           {Object.keys(appointmentInfoToShow).map((info) => (
             <Typography variant="h5" key={info}>
@@ -58,17 +57,27 @@ function AppointmentCard({ user, onStart, onCancel, patient }) {
       </Card>
     );
   } else {
+    let patientName;
+    try {
+      patientName = patient.firstname + " " + patient.lastname;
+    } catch (err) {
+      patientName = "Look in patient details";
+    }
+
     let appointmentInfoToShow = {
-      day: user.day,
-      motive: user.motive,
-      status: user.status,
+      Day: user.day,
+      Motive: user.motive,
+      "Patient name": patientName,
     };
     return (
-      <Card className="card-styles">
+      <Card className={`${style}`}>
         <CardContent>
           {Object.keys(appointmentInfoToShow).map((info) => (
             <Typography variant="h5" key={info}>
-              {info}: {info === "day" ? `${dayTimeDisplay}` : user[info]}
+              {info}:{" "}
+              {info === "Day"
+                ? `${dayTimeDisplay}`
+                : appointmentInfoToShow[info]}
             </Typography>
           ))}
         </CardContent>
