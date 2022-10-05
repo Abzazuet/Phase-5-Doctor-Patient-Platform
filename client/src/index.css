@@ -57,3 +57,7 @@ code {
   content: "\a" !important;
   white-space: pre !important;
 }
+.force-white-background{
+  background-color: white !important;
+  margin: 0 auto !important; 
+}

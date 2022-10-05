@@ -55,7 +55,7 @@ function NewAppointment() {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             defaultValue="none"
-            label="SelectedDessert"
+            label="Selected Patient"
             onChange={handlePatientChange}
           >
             <MenuItem value="none"></MenuItem>

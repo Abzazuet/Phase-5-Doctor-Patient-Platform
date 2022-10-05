@@ -49,6 +49,26 @@ function Home() {
           });
         }
       });
+      fetch("/medicines").then((r) => {
+        if(r.ok){
+          r.json().then((data) => {
+            dispatch({
+              type: "medicines/save",
+              medicines: data,
+            })
+          })
+        }
+      });
+      fetch("/frequencies").then((r) => {
+        if(r.ok){
+          r.json().then((data) => {
+            dispatch({
+              type: "frequencies/save",
+              frequencies: data,
+            })
+          })
+        }
+      });
     }
   }, [user]);
   return (
