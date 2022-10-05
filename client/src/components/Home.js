@@ -76,17 +76,7 @@ function Home() {
       <Typography variant="h2" mt={2} ml={2}>
         Home
       </Typography>
-      <Grid container>
-        <Grid item xs={12} md={4}>
           <UserCard user={user} handleDelete={handleDelete} />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Chat />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Conversation />
-        </Grid>
-      </Grid>
     </div>
   );
 }
