@@ -18,8 +18,7 @@ function counterReducer(state = initialState, action) {
     case "user/logout":
       return {
         ...state,
-        user: {},
-        patients: [],
+
       };
     case "patients/save":
       return {
