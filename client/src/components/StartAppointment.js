@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 function StartAppointment() {
   const appointment = useSelector((state) => state.appointment);
   const patients = useSelector((state) => state.patients);
+  const navigate = useNavigate();
+
   let patientEvaluated = patients.filter(
     (patient) => appointment.patient_id === patient.id
   );
@@ -51,11 +53,11 @@ function StartAppointment() {
     e.preventDefault();
     // Update appointment to finished
     updateAppointment();
-
+    createPreescription();
   }
-  function updateAppointment(){
-    appointment.status = "finished"
-    appointment.notes = appointmentData.notes
+  function updateAppointment() {
+    appointment.status = "finished";
+    appointment.notes = appointmentData.notes;
     fetch(`/appointments/${appointment.id}`, {
       method: "PATCH",
       body: JSON.stringify(appointment),
@@ -70,9 +72,34 @@ function StartAppointment() {
       }
     });
   }
-  function createPreescription(){
-    const medicine_id = medicines.filter((medicine) => medicine.name === appointmentData.medicine)[0].id
-    
+  function createPreescription() {
+    const medicine_id = medicines.filter(
+      (medicine) => medicine.name === appointmentData.medicine
+    )[0].id;
+    const frequency_id = frequencies.filter(
+      (frequency) => frequency.time_hours === appointmentData.frequency
+    )[0].id;
+    const duration_days = appointmentData.days;
+    const appointment_id = appointment.id;
+    const preescription = {
+      medicine_id: medicine_id,
+      frequency_id: frequency_id,
+      duration_days: duration_days,
+      appointment_id: appointment_id,
+    };
+    console.log(preescription)
+    fetch("/preescriptions", {
+      method: "POST",
+      body: JSON.stringify(preescription),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((r) => {
+      if (r.ok) {
+        window.alert("Preescription saved with succes");
+        navigate("/");
+      }
+    });
   }
   return (
     <div>

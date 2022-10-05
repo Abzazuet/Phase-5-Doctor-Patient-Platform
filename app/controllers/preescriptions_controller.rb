@@ -15,7 +15,7 @@ class PreescriptionsController < ApplicationController
 
   def create
     preescription = Preescription.create(preescription_params)
-    render json: patient, status: :created
+    render json: preescription, status: :created
   end
 
   def destroy
