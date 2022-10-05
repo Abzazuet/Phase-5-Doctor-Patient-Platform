@@ -39,7 +39,6 @@ function UserCard({ user, handleDelete }) {
     );
   } else {
     const userToRender = {
-      id: user.id,
       username: user.username,
       dob: user.dob,
       firstname: user.firstname,
