@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -304,7 +304,6 @@ const CalendarDate = ({
         i++;
       }
     }
-
     return output;
   };
 
@@ -372,7 +371,6 @@ const CalendarDate = ({
         let time = `${moment(range.start).format("H:mm")} - ${moment(
           range.end
         ).format("H:mm")}`;
-
         if (output[day]) {
           output[day].push(time);
         } else {
@@ -388,6 +386,12 @@ const CalendarDate = ({
     const today = moment();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [date, setDate] = useState({
+      year: "",
+      month: "",
+      day: "",
+      time: "",
+    });
     const [motive, setMotive] = useState("");
     const patientForAppointment = useSelector(
       (state) => state.patientForAppointment
@@ -443,16 +447,28 @@ const CalendarDate = ({
       setTimes(getDefaultTimes());
       setMonthNumber(newMonth);
     };
-
+    const constructDate = (time) => {
+      setDate({
+        year: year,
+        month: month,
+        day: activeDay,
+        time: time.time,
+      });
+    };
+    const [date2save, setDate2save] = useState("");
+    useEffect(() => {
+      setDate2save(
+        new Date(`${date.month} ${date.day} ${date.year} ${date.time}`)
+      );
+    }, [date]);
     const createTimeHandler = (i) => () => {
       const newTimes = [...times];
-      newTimes[i].available = !newTimes[i].available;
 
+      constructDate(newTimes[i]);
+      newTimes[i].available = !newTimes[i].available;
       if (activeDay) {
         addTimeToDay(newTimes);
       }
-
-      setTimes(newTimes);
     };
 
     const createDayHandler = (day) => () => {
@@ -467,15 +483,13 @@ const CalendarDate = ({
       const data = convertAvailabilityForDatabase(availabilityState);
       setSaving(true);
       setAvailability(data);
-      const date = data[data.length - 1].start;
       const appointmentToFetch = {
         doctor_id: doctor.id,
         patient_id: patientForAppointment.id,
-        day: date,
+        day: date2save,
         motive: motive, //To be filled
         status: "pending",
       };
-
       dispatch({
         type: "appointments/save",
         appointments: appointments,
@@ -825,7 +839,6 @@ const CalendarDate = ({
 
       if (newAvail.hasOwnProperty(year)) {
         if (newAvail[year].hasOwnProperty(month)) {
-          newAvail[year][month][activeDay] = newTimes;
         } else {
           newAvail[year][month] = {
             [activeDay]: newTimes,
@@ -838,7 +851,6 @@ const CalendarDate = ({
           },
         };
       }
-
       setAvailabilityState(newAvail);
       setQuickAvailability(
         makeQuickAvailability(convertAvailabilityForDatabase(newAvail))
