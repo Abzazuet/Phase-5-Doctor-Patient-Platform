@@ -19,7 +19,6 @@ function Appointments() {
   );
   const dispatch = useDispatch();
   const isDoctor = userData.specialty != undefined;
-  console.log(isDoctor);
   function handleNewAppointment() {
     navigate("/newAppointment");
   }
