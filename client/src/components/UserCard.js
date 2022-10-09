@@ -16,6 +16,7 @@ function UserCard({ user, handleDelete }) {
       dob: user.dob,
       firstname: user.firstname,
       lastname: user.lastname,
+      specialty: user.specialty,
     };
     return (
       <Card className="card-styles">
