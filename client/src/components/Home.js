@@ -26,10 +26,10 @@ function Home() {
   useEffect(() => {
     // Save all data related to user. Will render everytime user is fetched, since it may give an error for taking too long on fetching info
     if (user.username !== undefined) {
-      let typeOfUser = user.specialty !== undefined ? "doctors" : "patients";
+      let typeOfUser = user.specialty !== undefined ? "doctor" : "patient";
       let oppositeToUser =
         user.specialty !== undefined ? "patients" : "doctors";
-      fetch(`/${typeOfUser}/${user.id}`).then((response) => {
+      fetch(`/${typeOfUser}s/${user.id}`).then((response) => {
         if (response.ok) {
           response.json().then((data) => {
             dispatch({
@@ -49,24 +49,43 @@ function Home() {
           });
         }
       });
+      fetch("/appointments").then((r) => {
+        if (r.ok) {
+          r.json().then((data) => {
+            console.log(user);
+            console.log(
+              data.filter(
+                (appointment) =>
+                  appointment[typeOfUser+"_id"] === user.id
+              )
+            );
+            dispatch({
+              type: "appointments/save",
+              appointments: data.filter(
+                (appointment) => appointment.doctor_id === user.id
+              ),
+            });
+          });
+        }
+      });
       fetch("/medicines").then((r) => {
-        if(r.ok){
+        if (r.ok) {
           r.json().then((data) => {
             dispatch({
               type: "medicines/save",
               medicines: data,
-            })
-          })
+            });
+          });
         }
       });
       fetch("/frequencies").then((r) => {
-        if(r.ok){
+        if (r.ok) {
           r.json().then((data) => {
             dispatch({
               type: "frequencies/save",
               frequencies: data,
-            })
-          })
+            });
+          });
         }
       });
     }
@@ -76,7 +95,7 @@ function Home() {
       <Typography variant="h2" mt={2} ml={2}>
         Home
       </Typography>
-          <UserCard user={user} handleDelete={handleDelete} />
+      <UserCard user={user} handleDelete={handleDelete} />
     </div>
   );
 }

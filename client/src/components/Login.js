@@ -43,7 +43,6 @@ function Login() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) =>{ 
-          console.log(user)
           dispatch({ type: "user/login", user: user })});
         window.alert("Logged in with success");
         

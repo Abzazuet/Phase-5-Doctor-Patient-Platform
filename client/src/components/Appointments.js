@@ -157,6 +157,7 @@ function Appointments() {
                           (patient) => appointment.patient_id === patient.id
                         )[0]
                       }
+                      preescription={appointment.preescriptions[0]}
                     />
                   </Grid>
                 ))}
