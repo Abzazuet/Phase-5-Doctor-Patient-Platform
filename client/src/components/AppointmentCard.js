@@ -14,9 +14,9 @@ function AppointmentCard({
   style,
   preescription,
 }) {
-  console.log(patient);
   // read from the Redux store
   let medicines = useSelector((state) => state.medicines);
+  let userLoggedIn = useSelector((state) => state.user);
   let frequencies = useSelector((state) => state.frequencies);
   let dayTimeDisplay = new Date(
     `${user.day.split("T")[0]} ${user.day.split("T")[1]}`
@@ -51,24 +51,28 @@ function AppointmentCard({
             </Typography>
           ))}
         </CardContent>
-        <CardActions style={{ justifyContent: "center" }}>
-          <Button
-            className="button-delete"
-            variant="contained"
-            onClick={handleCancel}
-            align="left"
-          >
-            Cancel
-          </Button>
-          <Button
-            className="button-info"
-            variant="contained"
-            onClick={handleStart}
-            align="left"
-          >
-            Start
-          </Button>
-        </CardActions>
+        {userLoggedIn.specialty !== undefined ? (
+          <CardActions style={{ justifyContent: "center" }}>
+            <Button
+              className="button-delete"
+              variant="contained"
+              onClick={handleCancel}
+              align="left"
+            >
+              Cancel
+            </Button>
+            <Button
+              className="button-info"
+              variant="contained"
+              onClick={handleStart}
+              align="left"
+            >
+              Start
+            </Button>
+          </CardActions>
+        ) : (
+          ""
+        )}
       </Card>
     );
   } else {

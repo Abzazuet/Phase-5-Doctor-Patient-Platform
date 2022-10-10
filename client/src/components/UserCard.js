@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 function UserCard({ user, handleDelete }) {
   // read from the Redux store
   //Permit only this parameters to be rendered
+  let userLoggedIn = useSelector((state) => state.user);
+
   if (user.specialty != null) {
     const userToRender = {
       id: user.id,
@@ -18,6 +20,7 @@ function UserCard({ user, handleDelete }) {
       lastname: user.lastname,
       specialty: user.specialty,
     };
+    
     return (
       <Card className="card-styles">
         <CardContent>
@@ -27,15 +30,20 @@ function UserCard({ user, handleDelete }) {
             </Typography>
           ))}
         </CardContent>
-        <CardActions style={{ justifyContent: "center" }}>
-          <Button className="button-delete"
-            variant="contained"
-            onClick={onUserDelete}
-            align="left"
-          >
-            DELETE
-          </Button>
-        </CardActions>
+        {userLoggedIn.specialty !== undefined ? (
+          <CardActions style={{ justifyContent: "center" }}>
+            <Button
+              className="button-delete"
+              variant="contained"
+              onClick={onUserDelete}
+              align="left"
+            >
+              DELETE
+            </Button>
+          </CardActions>
+        ) : (
+          " "
+        )}
       </Card>
     );
   } else {
@@ -55,9 +63,7 @@ function UserCard({ user, handleDelete }) {
             </Typography>
           ))}
         </CardContent>
-        <CardActions style={{ justifyContent: "center" }}>
-          
-        </CardActions>
+        <CardActions style={{ justifyContent: "center" }}></CardActions>
       </Card>
     );
   }

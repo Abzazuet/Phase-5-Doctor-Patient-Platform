@@ -62,7 +62,7 @@ function Home() {
             dispatch({
               type: "appointments/save",
               appointments: data.filter(
-                (appointment) => appointment.doctor_id === user.id
+                (appointment) => appointment[typeOfUser+"_id"] === user.id
               ),
             });
           });
