@@ -88,6 +88,7 @@ function AppointmentCard({
         Day: user.day,
         Motive: user.motive,
         "Recipient name": patientName,
+        Notes: user.notes,
         Medicine: medicines.filter(
           (medicine) => medicine.id === preescription.medicine_id
         )[0].name,
